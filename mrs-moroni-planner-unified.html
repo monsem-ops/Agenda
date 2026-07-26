@@ -1,0 +1,2792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mrs. Moroni · Planner 2026–27</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap');
+
+  :root {
+    --work: #2563EB; --work-light: #DBEAFE;
+    --personal: #16A34A; --personal-light: #DCFCE7;
+    --holiday: #DC2626; --holiday-light: #FEE2E2;
+    --break: #9333EA; --break-light: #F3E8FF;
+    --noschool: #F59E0B; --noschool-light: #FEF3C7;
+    --eighth: #EA580C; --eighth-light: #FFF7ED;
+    --bg: #F8FAFC; --surface: #FFFFFF; --border: #E2E8F0;
+    --text: #0F172A; --text-muted: #64748B; --text-light: #94A3B8;
+    --header-bg: #0F172A; --radius: 12px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5; }
+
+  .app-header {
+    background: linear-gradient(135deg, var(--header-bg) 0%, #1E3A8A 120%); color: white; padding: 16px 22px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100; flex-wrap: wrap; gap: 10px;
+  }
+  .header-brand h1 { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 600; }
+  .app-header .subtitle { font-size: 11px; color: #B8C6E8; }
+  .header-actions { display: flex; gap: 8px; }
+  .view-tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+  .backup-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+  .backup-btn { background: none; border: 1px solid var(--border); color: var(--text-muted); border-radius: 8px; padding: 9px 16px; font-size: 12.5px; cursor: pointer; font-weight: 600; }
+  .backup-btn:hover { border-color: var(--work); color: var(--work); }
+  .backup-btn.danger { border-color: var(--holiday); color: var(--holiday); }
+  .backup-btn.danger:hover { color: #fff; background: var(--holiday); }
+  .view-tab {
+    background: none; border: 1px solid #3B5280; color: #C7D4F0;
+    border-radius: 8px; padding: 7px 14px; font-size: 12.5px; cursor: pointer; font-weight: 600;
+  }
+  .view-tab:hover { border-color: var(--work-light); color: #fff; }
+  .view-tab.active { background: var(--work); color: white; border-color: var(--work); }
+  .view-tab.sep-before { margin-left: 8px; }
+
+  .legend-bar {
+    background: #1E293B; padding: 8px 20px; display: flex; gap: 16px; flex-wrap: wrap;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #94A3B8; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── SECTION SUBNAV (Agenda: Year/Month/Week, Curriculum: 6/7/8/Library) ── */
+  .section-subnav {
+    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    max-width: 1100px; margin: 16px auto 0 auto; padding: 0 20px;
+  }
+  .section-subnav-tab {
+    background: var(--surface); border: 1px solid var(--border); color: var(--text-muted);
+    border-radius: 20px; padding: 7px 16px; font-size: 12.5px; cursor: pointer; font-weight: 600;
+  }
+  .section-subnav-tab:hover { border-color: var(--work); color: var(--work); }
+  .section-subnav-tab.active { background: var(--work); border-color: var(--work); color: #fff; }
+  .section-subnav-sep { width: 1px; height: 20px; background: var(--border); margin: 0 4px; }
+
+  /* ── DASHBOARD ── */
+  .dashboard-banner {
+    background: linear-gradient(120deg, #0F1F52 0%, #1E3A8A 60%, #2A4FA8 100%);
+    padding: 44px 20px 56px 20px; text-align: center; position: relative; overflow: hidden;
+  }
+  .dashboard-banner::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 15% 25%, rgba(255,255,255,0.06) 0, transparent 45%),
+                       radial-gradient(circle at 85% 75%, rgba(255,255,255,0.06) 0, transparent 45%);
+  }
+  .dashboard-banner-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+  .dashboard-eyebrow { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #C9A227; font-weight: 700; margin-bottom: 10px; }
+  .dashboard-hero-title { font-family: 'Fraunces', serif; font-size: 34px; font-weight: 600; color: #fff; line-height: 1.2; }
+  .dashboard-hero-sub { font-size: 13px; color: #B8C6E8; margin-top: 8px; }
+  .dashboard-gold-rule { width: 60px; height: 2px; background: #C9A227; margin: 18px auto 0 auto; }
+  .dashboard-container { max-width: 1000px; margin: -34px auto 0 auto; padding: 0 20px 40px 20px; position: relative; z-index: 2; }
+  .dashboard-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  @media(max-width:700px){ .dashboard-grid{ grid-template-columns:1fr; } }
+  .dash-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 26px;
+    cursor: pointer; box-shadow: var(--shadow-lg); transition: transform .15s ease, box-shadow .15s ease;
+    position: relative; overflow: hidden;
+  }
+  .dash-card:hover { transform: translateY(-4px); box-shadow: 0 16px 30px rgba(15,31,82,0.16); }
+  .dash-card::after { content:''; position:absolute; top:0; left:0; right:0; height:4px; }
+  .dash-card-agenda::after { background: var(--work); }
+  .dash-card-curriculum::after { background: var(--personal); }
+  .dash-card-tasks::after { background: #7C3AED; }
+  .dash-card-notes::after { background: var(--eighth); }
+  .dash-card-icon {
+    width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 14px;
+  }
+  .dash-card-agenda .dash-card-icon { background: var(--work-light); }
+  .dash-card-curriculum .dash-card-icon { background: var(--personal-light); }
+  .dash-card-tasks .dash-card-icon { background: var(--break-light); }
+  .dash-card-notes .dash-card-icon { background: var(--eighth-light); }
+  .dash-card-title { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 600; margin-bottom: 6px; }
+  .dash-card-sub { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; min-height: 36px; }
+  .dash-card-cta { font-size: 12.5px; font-weight: 700; color: var(--work); margin-top: 14px; }
+  .dash-card-curriculum .dash-card-cta { color: var(--personal); }
+  .dash-card-tasks .dash-card-cta { color: #7C3AED; }
+  .dash-card-notes .dash-card-cta { color: var(--eighth); }
+
+  /* ── SETTINGS / TASKS PAGE ── */
+  .tasks-page-container { max-width: 800px; margin: 0 auto; padding: 20px; }
+  .settings-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 16px; }
+  .settings-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 20px; border-bottom: 1px solid var(--border); }
+  .settings-row:last-child { border-bottom: none; }
+  .settings-row b { font-size: 14px; }
+  .settings-desc { font-size: 12px; color: var(--text-muted); margin-top: 3px; max-width: 420px; }
+
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* ── ANNUAL ── */
+  .annual-container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+  .annual-title { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 600; margin-bottom: 4px; }
+  .annual-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; }
+  .months-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+  .month-card { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; box-shadow: var(--shadow); }
+  .month-header { padding: 12px 16px; background: var(--header-bg); color: white; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+  .month-header h3 { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; }
+  .badge { font-size: 9px; padding: 2px 6px; border-radius: 20px; font-weight: 600; text-transform: uppercase; }
+  .badge-work { background: var(--work); color: white; }
+  .badge-personal { background: var(--personal); color: white; }
+
+  .mini-cal { padding: 12px 14px; }
+  .mini-cal-weekdays { display: grid; grid-template-columns: repeat(7,1fr); gap: 2px; margin-bottom: 4px; }
+  .mini-cal-weekdays span { text-align: center; font-size: 9px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+  .mini-cal-days { display: grid; grid-template-columns: repeat(7,1fr); gap: 2px; }
+  .mini-day {
+    aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+    border-radius: 6px; font-size: 11px; font-weight: 500; cursor: pointer;
+    position: relative; transition: all 0.15s;
+  }
+  .mini-day:hover { background: var(--work-light); color: var(--work); }
+  .mini-day.empty { cursor: default; }
+  .mini-day.empty:hover { background: none; }
+  .mini-day.today { background: var(--text); color: white; font-weight: 700; }
+  .mini-day.holiday { background: var(--holiday-light); color: var(--holiday); }
+  .mini-day.break-day { background: var(--break-light); color: var(--break); }
+  .mini-day.no-school { background: var(--noschool-light); color: #92400E; }
+  .mini-day.weekend { color: var(--text-muted); }
+  .mini-day.has-work { box-shadow: inset 0 -3px 0 var(--work); }
+  .mini-day.has-personal { box-shadow: inset 0 -3px 0 var(--personal); }
+  .mini-day.has-work.has-personal { box-shadow: inset 0 -3px 0 var(--work), inset 3px 0 0 var(--personal); }
+
+  .mini-day-add {
+    position: absolute; top: -3px; right: -3px; width: 14px; height: 14px;
+    background: var(--work); color: white; border-radius: 50%; font-size: 10px;
+    display: none; align-items: center; justify-content: center; line-height: 1; font-weight: 700;
+  }
+  .mini-day:hover .mini-day-add { display: flex; }
+
+  /* ── PENDING TASKS TRAY ── */
+  .tasks-tray { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 20px; box-shadow: var(--shadow); }
+  .tasks-tray-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .tasks-tray-title { font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .tasks-tray-count { background: #7C3AED; color: white; font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 700; }
+  .tasks-add-btn { background: var(--break-light); color: #7C3AED; border: none; border-radius: 8px; padding: 6px 14px; font-size: 12px; font-weight: 700; cursor: pointer; }
+  .tasks-add-btn:hover { background: #7C3AED; color: white; }
+  .tasks-list { display: flex; flex-direction: column; gap: 6px; }
+  .task-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); }
+  .task-row.urgent { border-color: var(--holiday); background: var(--holiday-light); }
+  .task-row.soon { border-color: var(--noschool); background: var(--noschool-light); }
+  .task-row.done { opacity: 0.5; }
+  .task-check { width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 11px; color: transparent; background: var(--surface); }
+  .task-check.checked { background: #7C3AED; border-color: #7C3AED; color: white; }
+  .task-text { flex: 1; font-size: 13px; }
+  .task-text.done { text-decoration: line-through; color: var(--text-muted); }
+  .task-due { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px; flex-shrink: 0; white-space: nowrap; }
+  .task-due.has-date { background: var(--surface); color: var(--text-muted); border: 1px solid var(--border); }
+  .task-due.urgent-date { background: var(--holiday); color: white; }
+  .task-due.soon-date { background: var(--noschool); color: #78350F; }
+  .task-due.no-date { background: var(--break-light); color: var(--break); }
+  .task-del { background: none; border: none; color: var(--text-light); cursor: pointer; font-size: 14px; padding: 2px 4px; border-radius: 4px; }
+  .task-del:hover { color: var(--holiday); background: var(--holiday-light); }
+  .tasks-empty { text-align: center; color: var(--text-light); font-size: 12px; padding: 16px 0; font-style: italic; }
+  .tasks-section-label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 8px; }
+  .task-date-toggle { display: flex; gap: 8px; margin-top: 8px; }
+  .task-date-toggle label { display: flex; align-items: center; gap: 6px; font-size: 12px; cursor: pointer; padding: 6px 10px; border: 1px solid var(--border); border-radius: 8px; flex: 1; justify-content: center; }
+  .task-date-toggle label.active { border-color: #7C3AED; background: var(--break-light); color: #7C3AED; font-weight: 600; }
+
+  .month-footer { padding: 8px 14px 12px; display: flex; flex-direction: column; gap: 4px; min-height: 20px; }
+  .event-chip-row { display: flex; align-items: center; gap: 6px; font-size: 11px; }
+  .event-chip-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .event-chip-dot.work { background: var(--work); }
+  .event-chip-dot.personal { background: var(--personal); }
+  .event-chip-text { color: var(--text-muted); }
+  .event-chip-text b { color: var(--text); font-weight: 600; }
+
+  /* ── MONTHLY ── */
+  .monthly-container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .month-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .month-nav-title { font-family: 'Fraunces', serif; font-size: 23px; font-weight: 600; }
+  .nav-btn { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 7px 12px; cursor: pointer; font-size: 14px; color: var(--text-muted); }
+  .nav-btn:hover { background: var(--work-light); color: var(--work); border-color: var(--work); }
+
+  .full-cal-weekdays { display: grid; grid-template-columns: repeat(7,1fr); gap: 4px; margin-bottom: 4px; }
+  .full-cal-weekdays span { text-align: center; font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; padding: 6px 0; }
+  .full-cal-days { display: grid; grid-template-columns: repeat(7,1fr); gap: 4px; }
+  .full-day {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    min-height: 84px; padding: 6px; cursor: pointer; position: relative; overflow: visible;
+  }
+  .full-day:hover { border-color: var(--work); box-shadow: var(--shadow-md); }
+  .full-day.empty { background: transparent; border-color: transparent; cursor: default; }
+  .full-day.today { border-color: var(--work); border-width: 2px; }
+  .full-day.today .day-num { background: var(--work); color: white; }
+  .full-day.holiday { background: var(--holiday-light); }
+  .full-day.break-day { background: var(--break-light); }
+  .full-day.no-school { background: var(--noschool-light); }
+  .full-day.weekend { background: #FAFAFA; }
+
+  .day-num { font-weight: 700; font-size: 13px; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 6px; margin-bottom: 3px; }
+  .school-label { font-size: 8px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 3px; }
+  .school-label.holiday-lbl { color: var(--holiday); }
+  .school-label.break-lbl { color: var(--break); }
+  .school-label.noschool-lbl { color: #92400E; }
+
+  .day-events { display: flex; flex-direction: column; gap: 2px; }
+  .day-event { font-size: 9px; padding: 2px 5px; border-radius: 4px; font-weight: 500; display: flex; align-items: center; justify-content: space-between; gap: 4px; }
+  .day-event-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .day-event.work { background: var(--work-light); color: var(--work); border-left: 2px solid var(--work); }
+  .day-event.personal { background: var(--personal-light); color: var(--personal); border-left: 2px solid var(--personal); }
+  .day-event-del { cursor: pointer; opacity: .55; flex-shrink: 0; }
+  .day-event-del:hover { opacity: 1; }
+
+  .add-event-mini {
+    position: absolute; bottom: 4px; right: 4px; width: 18px; height: 18px;
+    background: var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: var(--text-muted); opacity: 0; transition: opacity 0.15s;
+  }
+  .full-day:hover .add-event-mini { opacity: 1; }
+
+  .month-events-sidebar { margin-top: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
+  .month-events-sidebar h4 { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--text-muted); text-transform: uppercase; }
+  .sidebar-event { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--border); }
+  .sidebar-event:last-child { border-bottom: none; }
+  .sidebar-event-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+  .sidebar-event-info { flex: 1; min-width: 0; }
+  .sidebar-event-title { font-weight: 500; font-size: 13px; }
+  .sidebar-event-date { font-size: 11px; color: var(--text-muted); }
+  .sidebar-event-del { background: none; border: none; color: var(--text-light); cursor: pointer; font-size: 14px; padding: 2px 4px; border-radius: 4px; }
+  .sidebar-event-del:hover { color: var(--holiday); background: var(--holiday-light); }
+
+  /* ── WEEKLY (rotated: rows = grades+notes, cols = days) ── */
+  .weekly-container { max-width: 1300px; margin: 0 auto; padding: 20px; }
+  .week-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .week-nav-title { font-family: 'Fraunces', serif; font-size: 21px; font-weight: 600; }
+  .week-scroll { overflow-x: auto; padding-bottom: 8px; }
+  .week-table { width: 100%; min-width: 980px; border-collapse: separate; border-spacing: 6px; }
+  .week-table th { padding: 0; }
+  .week-day-head {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 8px; text-align: center; cursor: pointer; min-width: 135px;
+  }
+  .week-day-head:hover { background: var(--work-light); }
+  .week-day-head.is-today { border-color: var(--work); border-width: 2px; }
+  .week-day-name { font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); }
+  .week-day-num { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; }
+  .week-day-tag { font-size: 8px; font-weight: 700; text-transform: uppercase; margin-top: 2px; padding: 1px 5px; border-radius: 8px; display: inline-block; }
+  .week-day-tag.holiday { background: var(--holiday-light); color: var(--holiday); }
+  .week-day-tag.break-tag { background: var(--break-light); color: var(--break); }
+  .week-day-tag.noschool { background: var(--noschool-light); color: #92400E; }
+  .week-day-tag.workday { background: var(--work-light); color: var(--work); }
+  .week-events-cell { padding: 4px 2px; vertical-align: top; }
+  .week-event-pill { font-size: 9px; padding: 2px 5px; border-radius: 4px; font-weight: 500; margin-bottom: 2px; }
+  .week-event-pill.work { background: var(--work-light); color: var(--work); }
+  .week-event-pill.personal { background: var(--personal-light); color: var(--personal); }
+  .week-event-del { cursor: pointer; margin-left: 4px; opacity: .5; }
+  .week-event-del:hover { opacity: 1; }
+  .week-add-event-btn { width: 100%; background: none; border: 1px dashed var(--border); border-radius: 6px; font-size: 10px; padding: 4px; color: var(--text-muted); cursor: pointer; margin-top: 2px; }
+
+  .week-row-label {
+    font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.4px; padding: 8px 12px;
+    border-radius: 10px; vertical-align: top; min-width: 150px;
+  }
+  .week-row-label.notes { background: #F8F4FF; color: #7C3AED; }
+  .period-name-input { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 13px; border: none; background: transparent; width: 100%; padding: 2px 0; text-transform: none; letter-spacing: normal; }
+  .period-time-input { font-size: 10px; font-weight: 500; border: none; background: transparent; width: 100%; padding: 1px 0; color: var(--text-muted); text-transform: none; }
+  .period-grade-select { font-size: 10px; font-weight: 600; border: 1px solid rgba(0,0,0,0.1); border-radius: 5px; padding: 2px 4px; width: 100%; margin-top: 3px; background: var(--surface); text-transform: none; }
+  .period-row-actions { display: flex; align-items: center; gap: 6px; margin-top: 5px; }
+  .period-pos-select { font-size: 10px; border: 1px solid rgba(0,0,0,0.1); border-radius: 5px; padding: 2px 4px; background: var(--surface); text-transform: none; width: 40px; }
+  .period-del-btn { background: none; border: 1px solid var(--holiday); color: var(--holiday); border-radius: 5px; font-size: 10px; padding: 2px 6px; cursor: pointer; margin-left: auto; }
+  .week-footer-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .print-btn { background: none; border: 1px solid var(--border); color: var(--text-muted); padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; }
+  .print-btn:hover { border-color: var(--work); color: var(--work); }
+  .assign-noGrade { font-size: 10px; color: var(--text-light); font-style: italic; padding: 4px 0; }
+
+  .week-cell {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 6px; vertical-align: top; min-width: 135px;
+  }
+  .week-cell.b6 { border-top: 3px solid var(--work); }
+  .week-cell.b7 { border-top: 3px solid var(--personal); }
+  .week-cell.b8 { border-top: 3px solid var(--eighth); }
+  .week-cell.notes { border-top: 3px solid #7C3AED; }
+
+  .week-item { font-size: 11px; padding: 3px 0; display: flex; align-items: flex-start; gap: 5px; line-height: 1.3; border-bottom: 1px solid var(--border); }
+  .week-item:last-of-type { border-bottom: none; }
+  .week-item.done { text-decoration: line-through; color: var(--text-light); }
+  .week-item-check { width: 12px; height: 12px; border: 1.5px solid var(--border); border-radius: 3px; flex-shrink: 0; margin-top: 1px; cursor: pointer; }
+  .week-item-check.checked.notes { background: #7C3AED; border-color: #7C3AED; }
+  .week-item-text { flex: 1; cursor: pointer; word-break: break-word; }
+  .week-item-copy, .week-item-del { background: none; border: none; color: var(--text-light); cursor: pointer; font-size: 11px; padding: 0 2px; opacity: 0; flex-shrink: 0; }
+  .week-item:hover .week-item-copy, .week-item:hover .week-item-del { opacity: 1; }
+  .week-item-copy:hover { color: var(--work); }
+  .week-item-del:hover { color: var(--holiday); }
+
+  .week-add-input {
+    width: 100%; border: none; border-top: 1px dashed var(--border); margin-top: 4px; padding: 4px 2px 0;
+    font-size: 11px; font-family: inherit; outline: none; background: transparent;
+  }
+
+  .lesson-chip { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 6px 7px; margin-bottom: 5px; font-size: 11px; }
+  .lesson-chip.ghost { opacity: .55; border-style: dashed; }
+  .lesson-chip .lc-title { font-weight: 600; cursor: pointer; margin-bottom: 2px; }
+  .lesson-chip .lc-title:hover { text-decoration: underline; }
+  .lesson-chip .lc-unit { font-size: 9.5px; color: var(--text-muted); }
+  .lesson-chip .lc-actions { display: flex; gap: 4px; margin-top: 4px; }
+  .lesson-chip .lc-actions button { background: none; border: 1px solid var(--border); border-radius: 4px; font-size: 9px; padding: 2px 5px; color: var(--text-muted); }
+  .assign-select { width: 100%; font-size: 10.5px; padding: 5px; border: 1px dashed var(--border); border-radius: 6px; background: var(--surface); color: var(--text-muted); margin-top: 2px; }
+
+  /* ── DAILY ── */
+  .daily-container { max-width: 800px; margin: 0 auto; padding: 20px; }
+  .daily-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .daily-date-big { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; line-height: 1.1; }
+  .daily-date-sub { font-size: 12px; color: var(--text-muted); }
+  .daily-day-nav { display: flex; gap: 8px; }
+  .daily-school-status { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; margin: 8px 0; }
+  .status-school { background: var(--work-light); color: var(--work); }
+  .status-noschool { background: var(--noschool-light); color: #92400E; }
+  .status-break { background: var(--break-light); color: var(--break); }
+  .status-holiday { background: var(--holiday-light); color: var(--holiday); }
+  .status-weekend { background: var(--border); color: var(--text-muted); }
+
+  .blocks-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .day-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+  .block-header { padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; }
+  .block-title { font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; }
+  .block-6 .block-header { background: #EFF6FF; color: var(--work); }
+  .block-7 .block-header { background: #F0FDF4; color: var(--personal); }
+  .block-8 .block-header { background: #FFF7ED; color: var(--eighth); }
+  .block-notes .block-header { background: #F8F4FF; color: #7C3AED; }
+  .block-add-btn { background: none; border: 1px solid currentColor; border-radius: 6px; cursor: pointer; font-size: 11px; padding: 3px 8px; font-weight: 600; opacity: 0.6; }
+  .block-add-btn:hover { opacity: 1; }
+  .block-content { padding: 10px 14px; min-height: 100px; }
+  .block-item { display: flex; align-items: flex-start; gap: 10px; padding: 6px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
+  .block-item:last-child { border-bottom: none; }
+  .block-item-check { width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-top: 1px; cursor: pointer; font-size: 11px; color: transparent; }
+  .block-notes .block-item-check.checked { background: #7C3AED; border-color: #7C3AED; color: white; }
+  .block-item-text { flex: 1; font-size: 13px; line-height: 1.4; }
+  .block-item-text.done { text-decoration: line-through; color: var(--text-muted); }
+  .block-item-del { background: none; border: none; color: var(--text-light); cursor: pointer; font-size: 14px; padding: 1px 4px; opacity: 0; }
+  .block-item:hover .block-item-del { opacity: 1; }
+  .block-item-del:hover { color: var(--holiday); }
+  .block-empty { text-align: center; color: var(--text-light); font-size: 12px; padding: 16px 0; font-style: italic; }
+  .block-input-row { display: flex; gap: 6px; padding: 8px 14px 10px; border-top: 1px solid var(--border); }
+  .block-input { flex: 1; border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; font-size: 12px; font-family: inherit; background: var(--bg); outline: none; }
+  .block-save-btn { border: none; border-radius: 6px; padding: 6px 12px; font-size: 12px; font-weight: 600; cursor: pointer; color: white; }
+  .block-notes .block-save-btn { background: #7C3AED; }
+
+  .daily-events-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 16px; }
+  .daily-event-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+  .daily-event-pill.work { background: var(--work-light); color: var(--work); }
+  .daily-event-pill.personal { background: var(--personal-light); color: var(--personal); }
+  .daily-event-pill .pill-del { background: none; border: none; cursor: pointer; color: inherit; opacity: 0.5; font-size: 14px; padding: 0; line-height: 1; }
+  .daily-event-pill .pill-del:hover { opacity: 1; }
+  .add-event-pill { background: var(--bg); border: 1px dashed var(--border); border-radius: 20px; padding: 6px 12px; font-size: 12px; font-weight: 600; color: var(--text-muted); cursor: pointer; }
+
+  /* ── GRADE VIEWS (Units / Standards) ── */
+  .grade-container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+  .grade-title { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 600; margin-bottom: 2px; }
+  .grade-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; }
+  .subnav { display: flex; gap: 8px; margin-bottom: 16px; }
+  .subnav-tab { background: var(--surface); border: 1px solid var(--border); padding: 8px 16px; border-radius: 20px; font-size: 12.5px; font-weight: 600; color: var(--text-muted); cursor: pointer; }
+  .subnav-tab.active { background: var(--work); border-color: var(--work); color: #fff; }
+  .subview { display: none; }
+  .subview.active { display: block; }
+  .hint-banner { background: var(--work-light); border: 1px solid var(--border); border-radius: 8px; padding: 9px 12px; font-size: 12px; color: var(--text-muted); margin-bottom: 16px; }
+
+  .unit-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 14px; box-shadow: var(--shadow); overflow: hidden; }
+  .unit-top { padding: 14px 18px; cursor: pointer; }
+  .unit-top-main { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .unit-index { font-size: 11px; font-weight: 700; color: var(--text-light); min-width: 22px; }
+  .unit-title-edit { font-family: 'Space Grotesk'; font-weight: 700; font-size: 15.5px; border: none; background: transparent; color: var(--text); flex: 1; min-width: 160px; }
+  .unit-title-edit:focus { outline: 1px solid var(--work); border-radius: 3px; }
+  .unit-progress-wrap { display: flex; align-items: center; gap: 8px; }
+  .unit-progress { width: 80px; height: 6px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .unit-progress-fill { height: 100%; background: var(--personal); }
+  .unit-count { font-size: 11px; color: var(--text-muted); white-space: nowrap; }
+  .unit-target { width: 34px; font-size: 11px; border: 1px solid var(--border); border-radius: 3px; padding: 2px 3px; text-align: center; }
+  .unit-top-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); font-size: 11px; color: var(--text-muted); }
+  .unit-pos-select, .unit-copy-select, .lesson-copy-select, .lesson-move-select, .lesson-pos-select {
+    font-size: 12px; border: 1px solid var(--border); border-radius: 8px; padding: 5px 4px; color: var(--work); background: var(--bg);
+    width: 40px; text-align: center; text-align-last: center; cursor: pointer;
+  }
+  .unit-del-btn { background: none; border: 1px solid var(--holiday); color: var(--holiday); border-radius: 8px; width: 28px; height: 28px; font-size: 12px; cursor: pointer; margin-left: auto; }
+  .unit-body { max-height: 0; overflow: hidden; transition: max-height .2s ease; border-top: 1px solid var(--border); background: var(--bg); }
+  .unit-card.open .unit-body { max-height: 4000px; }
+  .unit-lesson-row { padding: 10px 18px; border-bottom: 1px solid var(--border); background: var(--surface); }
+  .unit-lesson-row:last-child { border-bottom: none; }
+  .ulr-main { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .ulr-index { font-size: 11px; color: var(--text-light); min-width: 16px; }
+  .unit-lesson-row .ulr-title { cursor: pointer; font-weight: 600; flex: 1; min-width: 160px; font-size: 13px; }
+  .unit-lesson-row .ulr-title:hover { text-decoration: underline; }
+  .ulr-badge { font-size: 10px; background: var(--bg); border: 1px solid var(--border); color: var(--text-muted); padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
+  .ulr-badge.muted { color: var(--text-light); }
+  .ulr-actions { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 8px; font-size: 11px; color: var(--text-muted); }
+  .ulr-dur-label { display: flex; align-items: center; gap: 4px; border: 1px solid var(--border); border-radius: 8px; padding: 4px 6px; background: var(--bg); }
+  .dur-input { width: 26px; font-size: 11px; border: none; background: transparent; padding: 0; text-align: center; }
+  .ulr-del { background: none; border: 1px solid var(--border); border-radius: 8px; color: var(--holiday); width: 28px; height: 28px; font-size: 11px; cursor: pointer; margin-left: auto; }
+  .unit-lesson-empty { padding: 16px 18px; font-size: 12px; color: var(--text-muted); }
+  .add-lesson-inline { margin: 12px 18px 16px 18px; background: none; border: 1px dashed var(--border); border-radius: 6px; padding: 8px; font-size: 12px; color: var(--text-muted); width: calc(100% - 36px); cursor: pointer; }
+  .add-unit-btn { background: var(--work); color: #fff; border: none; padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 4px; }
+
+  .std-controls { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .std-controls input { flex: 1; min-width: 160px; padding: 9px 10px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; }
+  .std-controls button { background: var(--work); color: #fff; border: none; padding: 9px 16px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; }
+  .std-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 16px; margin-bottom: 10px; box-shadow: var(--shadow); }
+  .std-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .std-code { font-family: 'Space Grotesk'; font-weight: 700; color: var(--work); min-width: 100px; }
+  .std-desc { flex: 1; font-size: 12.5px; color: var(--text-muted); min-width: 120px; }
+  .std-desc input { width: 100%; border: none; background: transparent; font-size: 12.5px; color: var(--text-muted); font-family: inherit; }
+  .std-count { font-size: 11.5px; background: var(--bg); padding: 3px 8px; border-radius: 8px; white-space: nowrap; }
+  .std-del { background: none; border: none; color: var(--holiday); font-size: 14px; cursor: pointer; }
+  .sub-list { margin: 8px 0 0 22px; border-left: 2px solid var(--border); padding-left: 14px; }
+  .sub-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; flex-wrap: wrap; }
+  .sub-row .std-code { min-width: 80px; font-size: 12.5px; }
+  .add-sub-btn { background: none; border: 1px dashed var(--border); border-radius: 4px; font-size: 11px; padding: 4px 8px; color: var(--text-muted); margin-top: 8px; cursor: pointer; }
+  .add-sub-form { display: none; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+  .add-sub-form.open { display: flex; }
+  .add-sub-form input { flex: 1; min-width: 100px; padding: 6px 8px; border: 1px solid var(--border); border-radius: 4px; font-size: 12px; }
+  .add-sub-form button { background: var(--work); color: #fff; border: none; border-radius: 4px; padding: 6px 10px; font-size: 12px; cursor: pointer; }
+
+  /* ── LIBRARY ── */
+  .library-container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+  .lib-controls { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+  .lib-controls input, .lib-controls select { padding: 9px 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; font-family: inherit; background: var(--surface); }
+  .lib-controls input { flex: 1; min-width: 180px; }
+  .lib-table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+  .lib-table th { text-align: left; font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); padding: 10px 12px; border-bottom: 1px solid var(--border); background: var(--bg); }
+  .lib-table td { padding: 10px 12px; border-bottom: 1px dotted var(--border); font-size: 12.5px; vertical-align: top; }
+  .lib-table tr:hover td { background: var(--bg); cursor: pointer; }
+  .chip-mini { font-size: 9.5px; background: var(--bg); padding: 1px 6px; border-radius: 8px; color: var(--work); }
+
+  /* ── MODALS ── */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; display: flex; align-items: flex-start; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.2s; overflow-y: auto; }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal { background: var(--surface); border-radius: 16px; padding: 22px; width: 100%; max-width: 400px; box-shadow: var(--shadow-lg); transform: translateY(8px); transition: transform 0.2s; margin: auto; }
+  .modal-overlay.open .modal { transform: translateY(0); }
+  .modal.modal-lg { max-width: 760px; }
+  .modal h3 { font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 14px; }
+  .modal-field { margin-bottom: 12px; }
+  .modal-label { display: block; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; margin-bottom: 5px; }
+  .modal-input, .modal-input-el { width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 9px 11px; font-size: 14px; font-family: inherit; outline: none; background: var(--bg); }
+  .modal-input:focus, .modal-input-el:focus { border-color: var(--work); }
+  textarea.modal-input-el { min-height: 54px; resize: vertical; }
+  .type-toggle { display: flex; gap: 8px; }
+  .type-btn { flex: 1; padding: 9px; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; background: var(--bg); }
+  .type-btn.work-btn.active { background: var(--work-light); border-color: var(--work); color: var(--work); }
+  .type-btn.personal-btn.active { background: var(--personal-light); border-color: var(--personal); color: var(--personal); }
+  .modal-actions { display: flex; gap: 8px; margin-top: 18px; }
+  .btn-cancel { flex: 1; padding: 9px; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; background: var(--bg); color: var(--text-muted); font-family: inherit; }
+  .btn-cancel:hover { background: var(--border); }
+  .btn-save { flex: 2; padding: 9px; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 700; background: var(--work); color: white; font-family: inherit; }
+  .btn-save:hover { background: #1D4ED8; }
+  .btn-delete { padding: 9px 14px; border: 1px solid var(--holiday); border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; background: var(--surface); color: var(--holiday); font-family: inherit; }
+  .copy-days-list { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
+  .copy-day-option { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 13px; }
+  .copy-day-option:hover { border-color: var(--work); background: var(--work-light); }
+  .copy-day-option input { width: 16px; height: 16px; cursor: pointer; }
+
+  .modal-section-title { font-family: 'Space Grotesk', sans-serif; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #7C3AED; border-top: 1px solid var(--border); padding-top: 14px; margin: 4px 0 -2px 0; }
+  .modal-section-title:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  @media(max-width:600px){ .row2,.row3{ grid-template-columns:1fr; } }
+  .tag-input-box { display: flex; flex-wrap: wrap; gap: 6px; border: 1px solid var(--border); border-radius: 8px; padding: 7px; background: var(--bg); align-items: center; }
+  .tag-input-box .tagchip { background: var(--work); color: #fff; font-size: 11px; padding: 3px 8px; border-radius: 10px; display: flex; align-items: center; gap: 5px; }
+  .tag-input-box .tagchip button { background: none; border: none; color: #fff; font-size: 11px; cursor: pointer; }
+  .tag-input-box select { border: none; background: none; flex: 1; min-width: 140px; font-size: 12.5px; padding: 4px; font-family: inherit; }
+  .res-list { display: flex; flex-direction: column; gap: 6px; }
+  .res-item { display: flex; gap: 6px; }
+  .res-item input { flex: 1; }
+  .res-item button { background: none; border: 1px solid var(--border); border-radius: 8px; width: 32px; cursor: pointer; }
+  .res-item .res-open { color: var(--work); font-weight: 700; }
+  .res-item .res-open:disabled { color: var(--border); cursor: not-allowed; }
+  .res-item .res-del { color: var(--holiday); }
+  .add-res-btn { background: none; border: 1px dashed var(--border); border-radius: 8px; padding: 7px; font-size: 12px; color: var(--text-muted); width: 100%; cursor: pointer; }
+
+  .diff-group { border: 1px solid var(--border); border-radius: 8px; padding: 12px; background: var(--bg); }
+  .diff-group + .diff-group { margin-top: 10px; }
+  .diff-group .modal-label { color: var(--work); }
+
+  .ai-panel { background: var(--break-light); border: 1px solid var(--break); border-radius: 10px; padding: 14px; }
+  .ai-panel-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .ai-panel-head h4 { font-family: 'Space Grotesk'; font-size: 13.5px; color: var(--break); }
+  .ai-btn { background: var(--break); color: #fff; border: none; padding: 8px 14px; border-radius: 8px; font-size: 12.5px; font-weight: 700; cursor: pointer; }
+  .ai-btn:disabled { opacity: .6; }
+  .ai-status { font-size: 11.5px; color: #6B21A8; margin-top: 8px; }
+  .ai-note { font-size: 11px; color: #6B21A8; margin-top: 6px; }
+
+  .confirm-box p { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin: 0 0 4px 0; }
+
+  .fab { position: fixed; bottom: 22px; right: 22px; width: 50px; height: 50px; background: var(--work); color: white; border: none; border-radius: 50%; font-size: 22px; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,0.4); display: flex; align-items: center; justify-content: center; z-index: 50; }
+
+  @media (max-width: 600px) {
+    .months-grid { grid-template-columns: 1fr; }
+    .blocks-grid { grid-template-columns: 1fr; }
+    .annual-container, .monthly-container, .daily-container, .weekly-container, .grade-container, .library-container { padding: 14px; }
+  }
+
+  /* ── PRINT ── */
+  #print-root { display: none; }
+  .print-block { padding: 20px; font-family: 'Inter', sans-serif; color: #111; }
+  .print-block h1 { font-family: 'Space Grotesk', sans-serif; font-size: 20px; margin-bottom: 2px; }
+  .print-block .print-sub { font-size: 12px; color: #555; margin-bottom: 16px; }
+  .print-block h2 { font-family: 'Space Grotesk', sans-serif; font-size: 14px; margin: 16px 0 6px 0; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+  .print-block table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+  .print-block th, .print-block td { border: 1px solid #ccc; padding: 6px 8px; font-size: 11px; text-align: left; vertical-align: top; }
+  .print-block th { background: #f0f0f0; }
+  .print-field { margin-bottom: 8px; font-size: 12px; }
+  .print-field b { display: block; font-size: 10px; text-transform: uppercase; color: #666; margin-bottom: 2px; }
+  @media print {
+    body.printing > *:not(#print-root) { display: none !important; }
+    body.printing #print-root { display: block !important; }
+    #print-root { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="header-brand" onclick="showView('dashboard')" style="cursor:pointer">
+    <h1>📋 Mrs. Moroni · Agenda</h1>
+    <div class="subtitle">P.B. Ritch Middle School · 2026–27 School Year</div>
+  </div>
+  <div class="header-actions">
+    <button class="view-tab" onclick="showView('dashboard')">🏠 Dashboard</button>
+    <button class="view-tab" onclick="showView('settings')">⚙️ Settings</button>
+  </div>
+</div>
+
+<div class="legend-bar">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--work)"></div> Work / School</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--personal)"></div> Personal</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--holiday)"></div> Holiday / No School</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--break)"></div> School Break</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--noschool)"></div> Non-Student Day</div>
+</div>
+
+<!-- DASHBOARD (home) -->
+<div id="view-dashboard" class="view active">
+  <div class="dashboard-banner">
+    <div class="dashboard-banner-inner">
+      <div class="dashboard-eyebrow">P.B. Ritch Middle School · 2026–27</div>
+      <div class="dashboard-hero-title">Good to see you, Mrs. Moroni</div>
+      <div class="dashboard-hero-sub" id="dashboard-date-line"></div>
+      <div class="dashboard-gold-rule"></div>
+    </div>
+  </div>
+  <div class="dashboard-container">
+    <div class="dashboard-grid">
+      <div class="dash-card dash-card-agenda" onclick="showView('annual')">
+        <div class="dash-card-icon">🗓️</div>
+        <div class="dash-card-title">Agenda</div>
+        <div class="dash-card-sub">Year, Month &amp; Week views — events, school calendar, and your weekly periods.</div>
+        <div class="dash-card-cta">Open Agenda →</div>
+      </div>
+      <div class="dash-card dash-card-curriculum" onclick="showView('grade6')">
+        <div class="dash-card-icon">🧭</div>
+        <div class="dash-card-title">Curriculum Map</div>
+        <div class="dash-card-sub">6th, 7th &amp; 8th grade — lesson planning, standards, and the full library.</div>
+        <div class="dash-card-cta">Open Curriculum Map →</div>
+      </div>
+      <div class="dash-card dash-card-tasks" onclick="showView('tasks')">
+        <div class="dash-card-icon">📌</div>
+        <div class="dash-card-title">Pending Tasks</div>
+        <div class="dash-card-sub" id="dash-tasks-preview">Loading...</div>
+        <div class="dash-card-cta">View all tasks →</div>
+      </div>
+      <div class="dash-card dash-card-notes" onclick="showView('noteslog')">
+        <div class="dash-card-icon">🗒️</div>
+        <div class="dash-card-title">Notes Log</div>
+        <div class="dash-card-sub">Every note you've jotted across your weeks, with the date, in one searchable place.</div>
+        <div class="dash-card-cta">Open Notes Log →</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTES LOG -->
+<div id="view-noteslog" class="view">
+  <div class="library-container">
+    <div class="grade-title">🗒️ Notes Log</div>
+    <div class="hint-banner">Every note from your Week view (period notes + the general Notes row), collected here with the date you wrote it.</div>
+    <div class="lib-controls">
+      <input type="text" id="notesLogSearch" placeholder="Search your notes...">
+      <select id="notesLogDateFilter"><option value="">All dates</option></select>
+      <select id="notesLogWhereFilter"><option value="">All (General + periods)</option></select>
+      <select id="notesLogStatusFilter">
+        <option value="">All notes</option>
+        <option value="pending">Not checked off</option>
+        <option value="done">Checked off</option>
+      </select>
+    </div>
+    <table class="lib-table">
+      <thead><tr><th>Date</th><th>Where</th><th>Note</th><th></th><th></th></tr></thead>
+      <tbody id="notesLogBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- PENDING TASKS (own page) -->
+<div id="view-tasks" class="view">
+  <div class="tasks-page-container">
+    <div class="grade-title">📌 Pending Tasks</div>
+    <div class="grade-sub">Reminders and to-dos that aren't tied to a specific lesson.</div>
+
+    <div class="tasks-tray">
+      <div class="tasks-tray-header">
+        <div class="tasks-tray-title">Pending <span class="tasks-tray-count" id="tasks-count">0</span></div>
+        <div style="display:flex;gap:8px;">
+          <button class="print-btn" onclick="printTasks()">🖨 Print</button>
+          <button class="tasks-add-btn" onclick="openTaskModal()">+ Add Task</button>
+        </div>
+      </div>
+      <div class="tasks-list" id="tasks-list"></div>
+    </div>
+
+    <div class="tasks-tray" style="margin-top:18px;">
+      <div class="tasks-tray-header">
+        <div class="tasks-tray-title">Completed <span class="tasks-tray-count" id="completed-count" style="background:var(--personal);">0</span></div>
+      </div>
+      <div class="lib-controls" style="margin-bottom:12px;">
+        <input type="text" id="completedSearch" placeholder="Search completed tasks by title...">
+        <select id="completedDateFilter"><option value="">All completion dates</option></select>
+      </div>
+      <div class="tasks-list" id="completed-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div id="view-settings" class="view">
+  <div class="tasks-page-container">
+    <div class="grade-title">⚙️ Settings</div>
+    <div class="grade-sub">Manage your data — everything here affects the whole planner.</div>
+    <div class="settings-card">
+      <div class="settings-row">
+        <div><b>Export backup</b><div class="settings-desc">Download everything (lessons, units, standards, events, notes) as a .json file.</div></div>
+        <button class="backup-btn" id="exportBtn">⭳ Export backup</button>
+      </div>
+      <div class="settings-row">
+        <div><b>Import backup</b><div class="settings-desc">Restore from a previously exported .json file. This replaces everything currently saved.</div></div>
+        <button class="backup-btn" id="importBtn">⭱ Import backup</button>
+        <input type="file" id="fileImport" accept="application/json" style="display:none">
+      </div>
+      <div class="settings-row">
+        <div><b>Reset all data</b><div class="settings-desc">Wipes everything and starts fresh. Export a backup first if you want to keep anything!</div></div>
+        <button class="backup-btn danger" id="resetBtn">⟲ Reset all data</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ANNUAL -->
+<div id="view-annual" class="view">
+  <div class="section-subnav">
+    <button class="section-subnav-tab" onclick="showView('dashboard')">← Dashboard</button>
+    <span class="section-subnav-sep"></span>
+    <button class="section-subnav-tab" data-view="annual" onclick="showView('annual')">Year</button>
+    <button class="section-subnav-tab" data-view="monthly" onclick="showView('monthly')">Month</button>
+    <button class="section-subnav-tab" data-view="weekly" onclick="showView('weekly')">Week</button>
+  </div>
+  <div class="annual-container">
+    <div class="annual-title">School Year 2026–27</div>
+    <div class="annual-sub">Paulding County School District · click a day to add events, click a month to open it, click a date number to jump to Week view</div>
+    <div class="months-grid" id="annual-months"></div>
+  </div>
+</div>
+
+<!-- MONTHLY -->
+<div id="view-monthly" class="view">
+  <div class="section-subnav">
+    <button class="section-subnav-tab" onclick="showView('dashboard')">← Dashboard</button>
+    <span class="section-subnav-sep"></span>
+    <button class="section-subnav-tab" data-view="annual" onclick="showView('annual')">Year</button>
+    <button class="section-subnav-tab" data-view="monthly" onclick="showView('monthly')">Month</button>
+    <button class="section-subnav-tab" data-view="weekly" onclick="showView('weekly')">Week</button>
+  </div>
+  <div class="monthly-container">
+    <div class="month-nav">
+      <button class="nav-btn" onclick="shiftMonth(-1)">← Prev</button>
+      <div class="month-nav-title" id="monthly-title"></div>
+      <button class="nav-btn" onclick="shiftMonth(1)">Next →</button>
+    </div>
+    <div class="full-cal-weekdays">
+      <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+    </div>
+    <div class="full-cal-days" id="monthly-days"></div>
+  </div>
+</div>
+
+<!-- WEEKLY (rotated: periods + notes) -->
+<div id="view-weekly" class="view">
+  <div class="section-subnav">
+    <button class="section-subnav-tab" onclick="showView('dashboard')">← Dashboard</button>
+    <span class="section-subnav-sep"></span>
+    <button class="section-subnav-tab" data-view="annual" onclick="showView('annual')">Year</button>
+    <button class="section-subnav-tab" data-view="monthly" onclick="showView('monthly')">Month</button>
+    <button class="section-subnav-tab" data-view="weekly" onclick="showView('weekly')">Week</button>
+  </div>
+  <div class="weekly-container">
+    <div class="week-nav">
+      <button class="nav-btn" onclick="shiftWeek(-1)">← Prev Week</button>
+      <div class="week-nav-title" id="weekly-title"></div>
+      <button class="nav-btn" onclick="shiftWeek(1)">Next Week →</button>
+    </div>
+    <div class="hint-banner">Each row is a real class period — rename it, set its time, and link it to a grade so lessons pull from the right Curriculum Map. Two periods can teach the same grade at different paces. The Notes row is for freeform reminders.</div>
+    <div class="week-scroll">
+      <table class="week-table" id="weekly-table"></table>
+    </div>
+    <div class="week-footer-actions">
+      <button class="add-unit-btn" onclick="addPeriod()">+ Add period</button>
+      <button class="print-btn" onclick="printWeek()">🖨 Print this week</button>
+    </div>
+  </div>
+</div>
+
+<!-- GRADE VIEWS -->
+<div id="view-grade6" class="view">
+  <div class="section-subnav">
+    <button class="section-subnav-tab" onclick="showView('dashboard')">← Dashboard</button>
+    <span class="section-subnav-sep"></span>
+    <button class="section-subnav-tab" data-view="grade6" onclick="showView('grade6')">6th</button>
+    <button class="section-subnav-tab" data-view="grade7" onclick="showView('grade7')">7th</button>
+    <button class="section-subnav-tab" data-view="grade8" onclick="showView('grade8')">8th</button>
+    <button class="section-subnav-tab" data-view="library" onclick="showView('library')">Library</button>
+  </div>
+  <div class="grade-container">
+    <div class="grade-title">6th Grade</div>
+    <div class="grade-sub">Exploring Engineering &amp; Technology</div>
+    <div class="subnav" data-grade="6">
+      <button class="subnav-tab" data-sub="units">📐 Lesson Planning</button>
+      <button class="subnav-tab" data-sub="standards">🎯 Standards</button>
+    </div>
+    <div class="subview" id="subview-units-6">
+      <div class="hint-banner">Build your lesson bank here: add units, add lessons inside each unit, set how many days each lesson takes. Then go to <b>Week</b> or <b>Day</b> to assign them to actual dates.</div>
+      <div id="unitsWrap-6"></div>
+    </div>
+    <div class="subview" id="subview-standards-6">
+      <div class="std-controls">
+        <input type="text" id="stdCodeNew-6" placeholder="Standard code (e.g. ETC-1)">
+        <input type="text" id="stdDescNew-6" placeholder="Short description">
+        <button onclick="addStandard('6')">+ Add standard</button>
+      </div>
+      <div id="stdList-6"></div>
+    </div>
+  </div>
+</div>
+<div id="view-grade7" class="view">
+  <div class="section-subnav">
+    <button class="section-subnav-tab" onclick="showView('dashboard')">← Dashboard</button>
+    <span class="section-subnav-sep"></span>
+    <button class="section-subnav-tab" data-view="grade6" onclick="showView('grade6')">6th</button>
+    <button class="section-subnav-tab" data-view="grade7" onclick="showView('grade7')">7th</button>
+    <button class="section-subnav-tab" data-view="grade8" onclick="showView('grade8')">8th</button>
+    <button class="section-subnav-tab" data-view="library" onclick="showView('library')">Library</button>
+  </div>
+  <div class="grade-container">
+    <div class="grade-title">7th Grade</div>
+    <div class="grade-sub">Invention &amp; Innovation</div>
+    <div class="subnav" data-grade="7">
+      <button class="subnav-tab" data-sub="units">📐 Lesson Planning</button>
+      <button class="subnav-tab" data-sub="standards">🎯 Standards</button>
+    </div>
+    <div class="subview" id="subview-units-7">
+      <div class="hint-banner">Build your lesson bank here: add units, add lessons inside each unit, set how many days each lesson takes. Then go to <b>Week</b> or <b>Day</b> to assign them to actual dates.</div>
+      <div id="unitsWrap-7"></div>
+    </div>
+    <div class="subview" id="subview-standards-7">
+      <div class="std-controls">
+        <input type="text" id="stdCodeNew-7" placeholder="Standard code (e.g. ETC-1)">
+        <input type="text" id="stdDescNew-7" placeholder="Short description">
+        <button onclick="addStandard('7')">+ Add standard</button>
+      </div>
+      <div id="stdList-7"></div>
+    </div>
+  </div>
+</div>
+<div id="view-grade8" class="view">
+  <div class="section-subnav">
+    <button class="section-subnav-tab" onclick="showView('dashboard')">← Dashboard</button>
+    <span class="section-subnav-sep"></span>
+    <button class="section-subnav-tab" data-view="grade6" onclick="showView('grade6')">6th</button>
+    <button class="section-subnav-tab" data-view="grade7" onclick="showView('grade7')">7th</button>
+    <button class="section-subnav-tab" data-view="grade8" onclick="showView('grade8')">8th</button>
+    <button class="section-subnav-tab" data-view="library" onclick="showView('library')">Library</button>
+  </div>
+  <div class="grade-container">
+    <div class="grade-title">8th Grade</div>
+    <div class="grade-sub">Technological Systems</div>
+    <div class="subnav" data-grade="8">
+      <button class="subnav-tab" data-sub="units">📐 Lesson Planning</button>
+      <button class="subnav-tab" data-sub="standards">🎯 Standards</button>
+    </div>
+    <div class="subview" id="subview-units-8">
+      <div class="hint-banner">Build your lesson bank here: add units, add lessons inside each unit, set how many days each lesson takes. Then go to <b>Week</b> or <b>Day</b> to assign them to actual dates.</div>
+      <div id="unitsWrap-8"></div>
+    </div>
+    <div class="subview" id="subview-standards-8">
+      <div class="std-controls">
+        <input type="text" id="stdCodeNew-8" placeholder="Standard code (e.g. ETC-1)">
+        <input type="text" id="stdDescNew-8" placeholder="Short description">
+        <button onclick="addStandard('8')">+ Add standard</button>
+      </div>
+      <div id="stdList-8"></div>
+    </div>
+  </div>
+</div>
+
+<!-- LIBRARY -->
+<div id="view-library" class="view">
+  <div class="section-subnav">
+    <button class="section-subnav-tab" onclick="showView('dashboard')">← Dashboard</button>
+    <span class="section-subnav-sep"></span>
+    <button class="section-subnav-tab" data-view="grade6" onclick="showView('grade6')">6th</button>
+    <button class="section-subnav-tab" data-view="grade7" onclick="showView('grade7')">7th</button>
+    <button class="section-subnav-tab" data-view="grade8" onclick="showView('grade8')">8th</button>
+    <button class="section-subnav-tab" data-view="library" onclick="showView('library')">Library</button>
+  </div>
+  <div class="library-container">
+    <div class="grade-title">Library</div>
+    <div class="hint-banner">Every lesson from all three grades, in one place.</div>
+    <div class="lib-controls">
+      <input type="text" id="libSearch" placeholder="Search by title, standard, or keyword...">
+      <select id="libGradeFilter">
+        <option value="">All grades</option>
+        <option value="6">6th grade</option>
+        <option value="7">7th grade</option>
+        <option value="8">8th grade</option>
+      </select>
+      <select id="libUnitFilter"></select>
+    </div>
+    <table class="lib-table">
+      <thead><tr><th>Lesson</th><th>Grade</th><th>Unit</th><th>Scheduled</th><th>Standards</th><th>Notes</th></tr></thead>
+      <tbody id="libBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ADD EVENT MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOnBg(event)">
+  <div class="modal">
+    <h3 id="modal-title">Add Event</h3>
+    <div class="modal-field">
+      <label class="modal-label">Event Type</label>
+      <div class="type-toggle">
+        <button class="type-btn work-btn active" id="type-work-btn" onclick="setEventType('work')">🔵 Work / School</button>
+        <button class="type-btn personal-btn" id="type-personal-btn" onclick="setEventType('personal')">🟢 Personal</button>
+      </div>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Event Name</label>
+      <input class="modal-input" id="event-name-input" placeholder="e.g. STEM Meeting, Dentist" onkeydown="if(event.key==='Enter') saveEvent()">
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Date</label>
+      <input class="modal-input" type="date" id="event-date-input">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" onclick="saveEvent()">Save Event</button>
+    </div>
+  </div>
+</div>
+
+<!-- COPY TO DAYS MODAL (for freeform notes) -->
+<div class="modal-overlay" id="copy-modal-overlay" onclick="closeCopyModalOnBg(event)">
+  <div class="modal">
+    <h3>Copy to other days</h3>
+    <div class="modal-field">
+      <label class="modal-label">Note</label>
+      <input class="modal-input" id="copy-task-text" disabled style="color:var(--text-muted)">
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Copy to</label>
+      <div class="copy-days-list" id="copy-days-list"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeCopyModal()">Cancel</button>
+      <button class="btn-save" onclick="confirmCopy()">Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD/EDIT TASK MODAL -->
+<div class="modal-overlay" id="task-modal-overlay" onclick="closeTaskModalOnBg(event)">
+  <div class="modal">
+    <h3 id="task-modal-title">📌 Add Task</h3>
+    <div class="modal-field">
+      <label class="modal-label">What do you need to do or remember?</label>
+      <input class="modal-input" id="task-text-input" placeholder="e.g. Submit budget to Director" onkeydown="if(event.key==='Enter') saveTask()">
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Due date</label>
+      <div class="task-date-toggle">
+        <label id="task-date-mode-none" class="active" onclick="setTaskDateMode('none')">
+          <input type="radio" name="taskdate" value="none" checked> No date / Reminder
+        </label>
+        <label id="task-date-mode-has" onclick="setTaskDateMode('date')">
+          <input type="radio" name="taskdate" value="date"> Has due date
+        </label>
+      </div>
+      <input class="modal-input" type="date" id="task-date-input" style="margin-top:8px;display:none">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-delete" id="taskDeleteBtn" style="display:none;" onclick="deleteTaskFromModal()">Delete</button>
+      <button class="btn-cancel" onclick="closeTaskModal()">Cancel</button>
+      <button class="btn-save" style="background:#7C3AED" onclick="saveTask()">Save Note</button>
+    </div>
+  </div>
+</div>
+
+<!-- LESSON EDITOR MODAL -->
+<div class="modal-overlay" id="lesson-modal-overlay" onclick="closeLessonModalOnBg(event)">
+  <div class="modal modal-lg">
+    <h3 id="lessonModalTitle">New lesson</h3>
+
+    <div class="modal-section-title">Planning</div>
+    <div class="modal-field">
+      <label class="modal-label">Lesson title</label>
+      <input class="modal-input" id="f_title" placeholder="e.g. Introduction to the Engineering Design Process">
+    </div>
+    <div class="row3">
+      <div class="modal-field"><label class="modal-label">Unit</label><select class="modal-input" id="f_unit"></select></div>
+      <div class="modal-field"><label class="modal-label">Duration (days)</label><input class="modal-input" type="number" id="f_duration" min="1" value="1"></div>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Standards</label>
+      <div class="tag-input-box" id="stdTagBox">
+        <select id="f_stdSelect"><option value="">+ choose a standard...</option></select>
+      </div>
+    </div>
+
+    <div class="modal-section-title">Objective</div>
+    <div class="modal-field"><label class="modal-label">Learning Target</label><textarea class="modal-input-el" id="f_objectives"></textarea></div>
+    <div class="modal-field"><label class="modal-label">Success Criteria</label><textarea class="modal-input-el" id="f_successcriteria"></textarea></div>
+    <div class="row2">
+      <div class="modal-field"><label class="modal-label">Prior Knowledge</label><textarea class="modal-input-el" id="f_priorknowledge"></textarea></div>
+      <div class="modal-field"><label class="modal-label">Powerful Questions</label><textarea class="modal-input-el" id="f_essentialq"></textarea></div>
+    </div>
+    <div class="modal-field"><label class="modal-label">Vocabulary</label><textarea class="modal-input-el" id="f_vocab"></textarea></div>
+
+    <div class="modal-section-title">Opening</div>
+    <div class="modal-field"><label class="modal-label">Warm Up</label><textarea class="modal-input-el" id="f_bellringer"></textarea></div>
+    <div class="modal-field"><label class="modal-label">Mini Lesson</label><textarea class="modal-input-el" id="f_minilesson"></textarea></div>
+    <div class="modal-field"><label class="modal-label">Quick Check-ins</label><textarea class="modal-input-el" id="f_quickcheck"></textarea></div>
+
+    <div class="modal-section-title">Work Period</div>
+    <div class="modal-field"><label class="modal-label">I — Modeling</label><textarea class="modal-input-el" id="f_modeling"></textarea></div>
+    <div class="modal-field"><label class="modal-label">We — Guided Practice</label><textarea class="modal-input-el" id="f_guided"></textarea></div>
+    <div class="modal-field"><label class="modal-label">You — Independent Practice</label><textarea class="modal-input-el" id="f_independent"></textarea></div>
+
+    <div class="modal-section-title">Closing</div>
+    <div class="row2">
+      <div class="modal-field"><label class="modal-label">Exit Ticket</label><textarea class="modal-input-el" id="f_exit"></textarea></div>
+      <div class="modal-field"><label class="modal-label">Homework</label><textarea class="modal-input-el" id="f_homework"></textarea></div>
+    </div>
+
+    <div class="modal-section-title">Planned Support</div>
+    <div class="diff-group"><label class="modal-label">ELL</label><textarea class="modal-input-el" id="f_ell"></textarea></div>
+    <div class="diff-group"><label class="modal-label">SPED</label><textarea class="modal-input-el" id="f_sped"></textarea></div>
+    <div class="diff-group"><label class="modal-label">Fast Finishers</label><textarea class="modal-input-el" id="f_fast"></textarea></div>
+
+    <div class="modal-section-title">Instructional Resources</div>
+    <div class="modal-field"><label class="modal-label">Materials</label><textarea class="modal-input-el" id="f_materials"></textarea></div>
+    <div class="modal-field">
+      <label class="modal-label">Files / Links (PDFs, Google Drive, etc.)</label>
+      <div class="res-list" id="resList"></div>
+      <button class="add-res-btn" id="addResBtn">+ Add file or link</button>
+    </div>
+
+    <div class="modal-section-title">Notes</div>
+    <div class="modal-field"><textarea class="modal-input-el" id="f_notes" placeholder="Anything else — reminders, what to adjust next year, etc."></textarea></div>
+
+    <div class="modal-actions">
+      <button class="btn-delete" id="lessonDeleteBtn" style="display:none;">Delete</button>
+      <button class="print-btn" onclick="printLesson()">🖨 Print</button>
+      <button class="btn-cancel" onclick="closeLessonModal()">Cancel</button>
+      <button class="btn-save" id="lessonSaveBtn">Save lesson</button>
+    </div>
+  </div>
+</div>
+
+<!-- CUSTOM CONFIRM MODAL (2-step, no native confirm/alert) -->
+<div class="modal-overlay" id="confirm-overlay">
+  <div class="modal">
+    <h3 id="confirmTitle">Are you sure?</h3>
+    <div class="confirm-box"><p id="confirmMsg"></p></div>
+    <div class="modal-actions" id="confirmActions">
+      <button class="btn-cancel" id="confirmCancelBtn">Cancel</button>
+      <button class="btn-delete" id="confirmOkBtn" style="flex:2;">Delete</button>
+    </div>
+  </div>
+</div>
+
+<button class="fab" onclick="openModal()" title="Add Event">+</button>
+
+<script>
+// ─── PAULDING COUNTY 2026-27 SCHOOL CALENDAR ───────────────────────────────
+const SCHOOL_EVENTS = {
+  '2026-07-27': { type: 'noschool', label: 'Staff Workday' },
+  '2026-07-28': { type: 'noschool', label: 'Staff Workday' },
+  '2026-07-29': { type: 'noschool', label: 'Staff Workday' },
+  '2026-07-30': { type: 'noschool', label: 'Staff Workday' },
+  '2026-07-31': { type: 'noschool', label: 'Staff Workday' },
+  '2026-08-03': { type: 'noschool', label: 'Staff Workday' },
+  '2026-08-04': { type: 'school', label: '🎉 First Day of School' },
+  '2026-09-04': { type: 'break', label: '💻 Digital Learning Day' },
+  '2026-09-07': { type: 'holiday', label: 'Labor Day' },
+  '2026-09-28': { type: 'holiday', label: 'Holiday / Schools Closed' },
+  '2026-09-29': { type: 'holiday', label: 'Holiday / Schools Closed' },
+  '2026-09-30': { type: 'holiday', label: 'Holiday / Schools Closed' },
+  '2026-10-01': { type: 'holiday', label: 'Holiday / Schools Closed' },
+  '2026-10-02': { type: 'holiday', label: 'Holiday / Schools Closed' },
+  '2026-10-16': { type: 'break', label: '💻 Digital Learning Day' },
+  '2026-10-19': { type: 'school', label: '⏰ Early Release' },
+  '2026-10-20': { type: 'school', label: '⏰ Early Release' },
+  '2026-11-03': { type: 'noschool', label: 'Staff Workday' },
+  '2026-11-23': { type: 'holiday', label: 'Thanksgiving Break' },
+  '2026-11-24': { type: 'holiday', label: 'Thanksgiving Break' },
+  '2026-11-25': { type: 'holiday', label: 'Thanksgiving Break' },
+  '2026-11-26': { type: 'holiday', label: 'Thanksgiving Break' },
+  '2026-11-27': { type: 'holiday', label: 'Thanksgiving Break' },
+  '2026-12-18': { type: 'school', label: '⏰ Early Release' },
+  '2026-12-21': { type: 'holiday', label: 'Winter Break' },
+  '2026-12-22': { type: 'holiday', label: 'Winter Break' },
+  '2026-12-23': { type: 'holiday', label: 'Winter Break' },
+  '2026-12-24': { type: 'holiday', label: 'Winter Break' },
+  '2026-12-25': { type: 'holiday', label: 'Winter Break / Christmas' },
+  '2026-12-28': { type: 'holiday', label: 'Winter Break' },
+  '2026-12-29': { type: 'holiday', label: 'Winter Break' },
+  '2026-12-30': { type: 'holiday', label: 'Winter Break' },
+  '2026-12-31': { type: 'holiday', label: 'Winter Break' },
+  '2027-01-01': { type: 'holiday', label: "Winter Break / New Year" },
+  '2027-01-04': { type: 'noschool', label: 'Staff Workday' },
+  '2027-01-15': { type: 'break', label: '💻 Digital Learning Day' },
+  '2027-01-18': { type: 'holiday', label: 'MLK Jr. Day' },
+  '2027-02-15': { type: 'holiday', label: 'Mid-Winter Break' },
+  '2027-02-16': { type: 'holiday', label: 'Mid-Winter Break' },
+  '2027-02-17': { type: 'holiday', label: 'Mid-Winter Break' },
+  '2027-02-18': { type: 'holiday', label: 'Mid-Winter Break' },
+  '2027-02-19': { type: 'holiday', label: 'Mid-Winter Break' },
+  '2027-03-12': { type: 'noschool', label: 'Staff Workday' },
+  '2027-03-15': { type: 'school', label: '⏰ Early Release' },
+  '2027-03-16': { type: 'school', label: '⏰ Early Release' },
+  '2027-04-05': { type: 'holiday', label: 'Spring Break' },
+  '2027-04-06': { type: 'holiday', label: 'Spring Break' },
+  '2027-04-07': { type: 'holiday', label: 'Spring Break' },
+  '2027-04-08': { type: 'holiday', label: 'Spring Break' },
+  '2027-04-09': { type: 'holiday', label: 'Spring Break' },
+  '2027-05-19': { type: 'school', label: '⏰ Early Release' },
+  '2027-05-26': { type: 'school', label: '🎓 Last Day / Early Release' },
+  '2027-05-27': { type: 'noschool', label: 'Staff Workday' },
+  '2027-05-28': { type: 'noschool', label: 'Staff Workday' },
+  '2027-05-31': { type: 'holiday', label: 'Holiday / Schools Closed' },
+};
+
+const MONTHS = [
+  { year: 2026, month: 7 }, { year: 2026, month: 8 }, { year: 2026, month: 9 },
+  { year: 2026, month: 10 }, { year: 2026, month: 11 }, { year: 2026, month: 12 },
+  { year: 2027, month: 1 }, { year: 2027, month: 2 }, { year: 2027, month: 3 },
+  { year: 2027, month: 4 }, { year: 2027, month: 5 }, { year: 2027, month: 6 },
+];
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const DEFAULT_PERIODS = [
+  { id:'p_di',  name:'DI',          time:'', gradeLink:'' },
+  { id:'p_1st', name:'1st period',  time:'', gradeLink:'6' },
+  { id:'p_2nd', name:'2nd period',  time:'', gradeLink:'7' },
+  { id:'p_3rd', name:'3rd period',  time:'', gradeLink:'8' },
+  { id:'p_4th', name:'4th period',  time:'', gradeLink:'6' },
+  { id:'p_5th', name:'5th period',  time:'', gradeLink:'7' },
+  { id:'p_6th', name:'6th period',  time:'', gradeLink:'8' },
+];
+const GRADE_LABELS = { '6':'6th · Exploring Engineering & Technology', '7':'7th · Invention & Innovation', '8':'8th · Technological Systems' };
+
+function uid(prefix){ return (prefix||'id') + '_' + Math.random().toString(36).slice(2,10); }
+function dateKey(y, m, d) { return `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`; }
+
+// ─── SEED LESSON CONTENT (Unit 1, identical across grades) ──────────────────
+const UNIT1_DATES = ['2026-08-04','2026-08-05','2026-08-06','2026-08-07','2026-08-10',
+                      '2026-08-11','2026-08-12','2026-08-13','2026-08-14','2026-08-17'];
+const UNIT1_LESSONS_TEMPLATE = [
+  { title:'Course Overview, Expectations & What Is Engineering?', duration:1,
+    objectives:'Students will understand course expectations, the grading system, and form an initial definition of engineering and its disciplines.',
+    essentialq:'What does an engineer actually do, and how many kinds of engineers are there?',
+    vocab:'Engineer, discipline, expectation', materials:'Syllabus copies, slides, projector',
+    bellringer:'Turn and talk: What do you think an engineer does? Write 3 words that come to mind.',
+    hook:'Show 4 short clips of different engineers at work and have students guess the discipline.',
+    minilesson:'Walk through the syllabus and grading; define engineering and list major disciplines with real examples.',
+    quickcheck:'Thumbs up/down: is this task engineering or not? (rapid-fire examples)',
+    guided:'As a class, sort 8 job description cards into engineering disciplines.',
+    independent:'Students sort their own set of 4 cards independently and justify one choice in writing.',
+    enotebook:'Glue in the syllabus summary; write today\u2019s definition of engineering in your own words.',
+    closure:'Cold call 3 students to share their definition of engineering.',
+    exit:'Write one sentence describing what an engineer does, in your own words.', homework:'None.',
+    ell:'Printed syllabus summary with icons; sentence starters for discussion.',
+    sped:'Extended time on the written reflection; visual card sort.',
+    fast:'Research and add a 5th engineering discipline not covered in class.',
+    standards:['ETC-1.1'], files:['Syllabus (PDF)','Slides: What Is Engineering?'] },
+  { title:'Teamwork, Communication & Work Ethic', duration:1,
+    objectives:'Students will identify traits of effective teamwork and communication and apply Raven Way expectations to group work.',
+    essentialq:'What makes a team actually work well together?',
+    vocab:'Collaboration, work ethic, The Raven Way', materials:'Team challenge materials (paper, tape), Raven Way poster',
+    bellringer:'List 2 qualities of a good teammate and 1 thing that makes teamwork hard.',
+    hook:'Quick human-knot challenge to show the value of communication under pressure.',
+    minilesson:'Introduce Respectful, Responsible, Resourceful, Relatable and connect each to a teamwork behavior.',
+    quickcheck:'Quick poll: which Raven Way trait is hardest for you personally?',
+    guided:'Team paper-tower challenge with assigned roles, teacher circulating and coaching.',
+    independent:'Individually rate your own teamwork on today\u2019s challenge (1-4 scale) with a reason.',
+    enotebook:'Record your team\u2019s tower height and one thing you\u2019d do differently.',
+    closure:'Share out: one group whose teamwork stood out and why.',
+    exit:'Name one Raven Way trait you used today and how.', homework:'None.',
+    ell:'Assign clear roles for the group challenge; visual role cards.',
+    sped:'Pre-assigned role matched to strengths; visual role cards.',
+    fast:'Coach a struggling team without taking over their tower.',
+    standards:['ETC-1.2'], files:['Team challenge materials','Raven Way poster'] },
+  { title:'Lab Safety Rules, Signs & Symbols', duration:1,
+    objectives:'Students will recognize common lab safety signs/symbols and state the classroom safety rules.',
+    essentialq:'Why do safety symbols need to be understood instantly, without reading words?',
+    vocab:'Hazard, symbol, signage', materials:'Safety signs slide deck, safety symbols worksheet',
+    bellringer:'Look at these 3 safety symbols — what do you think each one means?',
+    hook:'Show a real workplace photo full of safety signage and count how many symbols students can name.',
+    minilesson:'Walk through each classroom safety rule and its matching sign/symbol.',
+    quickcheck:'Show a symbol, students write its meaning on a whiteboard.',
+    guided:'Class builds a shared reference chart of symbols and meanings.',
+    independent:'Complete the safety symbols matching worksheet.',
+    enotebook:'Paste the safety signs reference sheet into the notebook.',
+    closure:'Exit poll: which symbol will you remember most, and why?',
+    exit:'Match 3 safety symbols to their meanings.', homework:'None.',
+    ell:'Symbol/meaning matching cards.', sped:'Simplified rule list with icons.',
+    fast:'Design one new safety symbol for a hazard not yet covered.',
+    standards:['Safety-1'], files:['Safety signs slide deck','Safety symbols worksheet'] },
+  { title:'PPE, Tool Identification & SOP', duration:1,
+    objectives:'Students will identify required PPE, correctly name common lab tools, and explain the basics of a Standard Operating Procedure (SOP).',
+    essentialq:'What could go wrong if we skip PPE or ignore an SOP?',
+    vocab:'PPE, SOP, tool', materials:'PPE sample bin, tool ID cards, SOP handout',
+    bellringer:'Which piece of PPE protects your eyes? Your hands?',
+    hook:'Pass around real PPE samples and have students guess their purpose.',
+    minilesson:'Introduce each required PPE item, name key tools, and explain what an SOP is for.',
+    quickcheck:'Rapid tool ID: hold up a tool, students name it.',
+    guided:'Station rotation: PPE station, tool ID station, SOP reading station.',
+    independent:'Complete the tool ID matching sheet independently.',
+    enotebook:'List the 3 required PPE items and 3 tools with one-line descriptions.',
+    closure:'Ask: which tool are you most excited to use this year?',
+    exit:'Name 2 PPE items and 1 tool you learned today.', homework:'None.',
+    ell:'Physical PPE samples for hands-on learning; picture-labeled tool chart.',
+    sped:'Picture-labeled tool chart; extra station time.',
+    fast:'Read ahead in the SOP handout and write one question about it.',
+    standards:['Safety-2'], files:['PPE sample bin','Tool ID cards','SOP handout'] },
+  { title:'🔨 Mini Challenge: Lab Safety Scavenger Hunt', duration:1,
+    objectives:'Students will apply safety knowledge by locating and identifying safety equipment/signage in the classroom.',
+    essentialq:'Could you find everything you need in an emergency, right now?',
+    vocab:'Scavenger hunt, emergency equipment', materials:'Scavenger hunt worksheet',
+    bellringer:'Quick review: what does PPE stand for?',
+    hook:'Timer challenge: how fast can your group find the fire extinguisher?',
+    minilesson:'Quick review of what to look for: signage, PPE stations, exits, emergency equipment.',
+    quickcheck:'Spot-check one group\u2019s progress halfway through.',
+    guided:'N/A — this is the guided/independent activity itself.',
+    independent:'Small groups complete the scavenger hunt around the room.',
+    enotebook:'Record the 5 safety items you located and where they are.',
+    closure:'Quick class share-out of anything tricky to find.',
+    exit:'Turn in the completed scavenger hunt sheet.', homework:'None.',
+    ell:'Pair with strong readers; picture checklist provided.', sped:'Picture checklist; assigned partner.',
+    fast:'Sketch a safety map of the room from memory.',
+    standards:['Safety-1','Safety-2'], files:['Scavenger hunt worksheet'],
+    notes:'Review note: ran short on time — next year, add 10 minutes or cut down the number of stations.' },
+  { title:'Introduction to the STEM Notebook – Setup & Purpose', duration:1,
+    objectives:'Students will correctly set up their STEM Notebook and understand its purpose for documenting engineering work.',
+    essentialq:'Why do engineers document their work instead of just remembering it?',
+    vocab:'STEM Notebook, documentation', materials:'Composition notebook, notebook setup template',
+    bellringer:'Why do you think engineers keep notebooks of their work?',
+    hook:'Show a real engineering notebook page (messy sketches and all) and ask what students notice.',
+    minilesson:'Model setting up the table of contents, page numbering, and notebook rules.',
+    quickcheck:'Check that every notebook has a numbered page 1.',
+    guided:'Set up the table of contents together, page by page.', independent:'Design your own cover page.',
+    enotebook:'This IS the notebook entry — cover page and TOC setup.',
+    closure:'Share one thing on your cover page that represents you.',
+    exit:'Complete your STEM Notebook cover page.', homework:'Bring notebook back tomorrow, every day, all year.',
+    ell:'Printed notebook setup template.', sped:'Printed notebook setup template; extra time.',
+    fast:'Add a "future ideas" page at the back of the notebook.',
+    standards:['ETC-2.1'], files:['Composition notebook','Notebook setup template'] },
+  { title:'How to Use the STEM Notebook Every Day', duration:1,
+    objectives:'Students will practice the daily STEM Notebook routine (bellwork, notes, reflection).',
+    essentialq:'What should a "good" daily notebook entry actually include?',
+    vocab:'Routine, reflection', materials:'Notebook checklist',
+    bellringer:'Practice the routine: write today\u2019s date + question in your notebook.',
+    hook:'Show two sample entries — one strong, one weak — and ask which is better and why.',
+    minilesson:'Model the daily entry format step by step.',
+    quickcheck:'Walk the room checking that dates and questions are recorded correctly.',
+    guided:'Guided practice writing one full entry together.',
+    independent:'Write a second entry independently using the checklist.',
+    enotebook:'This IS the notebook entry practice.',
+    closure:'Peer-check a partner\u2019s entry against the checklist.',
+    exit:'Peer-check a notebook entry against a checklist.', homework:'None.',
+    ell:'Sentence starters for the written reflection.', sped:'Sentence starters; checklist with icons.',
+    fast:'Add extra detail or a sketch to your entry.',
+    standards:['ETC-2.1'], files:['Notebook checklist'] },
+  { title:'Digital Citizenship & Professional Etiquette', duration:1,
+    objectives:'Students will understand expectations for digital citizenship and professional communication (email, Canvas, Google Drive).',
+    essentialq:'How is writing to a teacher different from texting a friend?',
+    vocab:'Digital citizenship, etiquette, professional tone', materials:'Digital citizenship slides, email template',
+    bellringer:'What does it mean to be "professional" online?',
+    hook:'Show 2 example emails (one casual, one professional) and vote on which gets a faster reply.',
+    minilesson:'Discuss digital citizenship scenarios and expectations for Canvas/email/Drive.',
+    quickcheck:'Identify what\u2019s wrong with a poorly written sample email.',
+    guided:'Rewrite a bad sample email together as a class.',
+    independent:'Write your own professional email using the template.',
+    enotebook:'Note 3 rules of professional digital communication.',
+    closure:'Read one strong example email aloud (with permission).',
+    exit:'Submit the practice professional email.', homework:'None.',
+    ell:'Email template with sentence frames.', sped:'Email template with sentence frames; extra time.',
+    fast:'Write a follow-up email replying to your own message.',
+    standards:['ETC-1.3'], files:['Digital citizenship slides','Email template'] },
+  { title:'🏆 Main Project: "My Engineer Identity" Poster', duration:1,
+    objectives:'Students will synthesize unit learning by creating a poster identifying personal strengths connected to an engineering discipline.',
+    essentialq:'Which engineering discipline fits who you already are?',
+    vocab:'Identity, strengths, discipline', materials:'Poster paper or Canva template, engineering disciplines list',
+    bellringer:'Which type of engineer from this unit interests you most, and why?',
+    hook:'Quick gallery walk of last year\u2019s posters (or exemplar) for inspiration.',
+    minilesson:'Review poster requirements: discipline, strengths, safety commitment.',
+    quickcheck:'Thumbs check: does everyone know their discipline choice yet?',
+    guided:'Brainstorm strengths together as a class before individual work.',
+    independent:'Design and create the poster.', enotebook:'Sketch a rough draft of your poster layout first.',
+    closure:'Share one detail from your poster with a partner.',
+    exit:'Share one detail from your poster with a partner.', homework:'Finish poster if not complete.',
+    ell:'Sentence starters and a discipline choice bank.', sped:'Sentence starters; extended work time.',
+    fast:'Add a "day in the life" comic strip to the poster.',
+    standards:['ETC-1.1','ETC-1.2'], files:['Poster paper / Canva template','Engineering disciplines list'] },
+  { title:'Unit 1 Assessment', duration:1,
+    objectives:'Students will demonstrate understanding of course expectations, safety rules, PPE, and STEM Notebook procedures.',
+    essentialq:'What have you learned so far that you could teach to a new student?',
+    vocab:'Review of all Unit 1 vocabulary', materials:'Unit 1 Assessment (printed or Canvas)',
+    bellringer:'Quiet review time, 5 minutes.', hook:'None — straight into assessment.',
+    minilesson:'N/A.', quickcheck:'N/A.', guided:'N/A.',
+    independent:'Complete the Unit 1 assessment independently.',
+    enotebook:'Students may use their notebook as a resource if allowed.',
+    closure:'Collect assessments and preview Unit 2.',
+    exit:'Turn in the completed assessment.', homework:'None.',
+    ell:'Extended time, read-aloud accommodation, word bank.', sped:'Extended time, read-aloud accommodation, word bank.',
+    fast:'Silent reading or notebook organizing once finished.',
+    standards:['ETC-1.1','Safety-1','Safety-2','ETC-2.1'], files:['Unit 1 Assessment (printed or Canvas)'] },
+];
+function buildSeedUnitsAndLessons(){
+  const units = {}, unitTargets = {}, lessons = [];
+  ['6','7','8'].forEach(grade=>{
+    const introId = uid('u');
+    units[grade] = [
+      {id: introId, name:'Introduction & Safety'},
+      {id: uid('u'), name:'Unit 2'}, {id: uid('u'), name:'Unit 3'}, {id: uid('u'), name:'Unit 4'},
+      {id: uid('u'), name: grade==='6' ? 'Major Design Challenge' : (grade==='7' ? 'Invention Convention' : 'Systems Design Showcase')},
+    ];
+    unitTargets[grade] = {};
+    units[grade].forEach((u,i)=>{ unitTargets[grade][u.id] = i===0 ? 10 : 0; });
+    UNIT1_LESSONS_TEMPLATE.forEach((tpl,i)=>{
+      lessons.push(Object.assign({ id: uid('l'), grade, unitId: introId, date: UNIT1_DATES[i], files:[], notes:'', order:i }, tpl));
+    });
+  });
+  return {units, unitTargets, lessons};
+}
+const EMPLOYABILITY_SUB = (prefix)=>[
+  {code:prefix+'-1.1', desc:'Communicate effectively through writing, speaking, listening, reading, and interpersonal abilities.', parent:prefix+'-1'},
+  {code:prefix+'-1.2', desc:'Demonstrate creativity by asking challenging questions and applying innovative procedures and methods.', parent:prefix+'-1'},
+  {code:prefix+'-1.3', desc:'Exhibit critical thinking and problem solving skills to locate, analyze and apply information in career planning and employment situations.', parent:prefix+'-1'},
+  {code:prefix+'-1.4', desc:'Model work readiness traits required for success in the workplace including integrity, honesty, accountability, punctuality, time management, and respect for diversity.', parent:prefix+'-1'},
+  {code:prefix+'-1.5', desc:'Apply the appropriate skill sets to be productive in a changing, technological, diverse workplace to be able to work independently and apply teamwork skills.', parent:prefix+'-1'},
+  {code:prefix+'-1.6', desc:'Present a professional image through appearance, behavior and language.', parent:prefix+'-1'},
+];
+const SAFETY_SUB = (prefix)=>[
+  {code:prefix+'-2.1', desc:'Accurately interpret and adhere to safety signs, symbols, and labels.', parent:prefix+'-2'},
+  {code:prefix+'-2.2', desc:'Demonstrate and incorporate safe laboratory procedures in lab, shop, and field environments.', parent:prefix+'-2'},
+  {code:prefix+'-2.3', desc:'Identify, select, and use appropriate PPE, follow work area organization procedures and follow SOP when performing work.', parent:prefix+'-2'},
+  {code:prefix+'-2.4', desc:'Identify, select, and use appropriate tools and machines for specific tasks.', parent:prefix+'-2'},
+  {code:prefix+'-2.5', desc:'Demonstrate safe use of tools and machines.', parent:prefix+'-2'},
+];
+const TSA_SUB = (prefix, n)=>[
+  {code:`${prefix}-${n}.1`, desc:'Explain the goals, mission and objectives of CTSO organizations.', parent:`${prefix}-${n}`},
+  {code:`${prefix}-${n}.2`, desc:'Explain how participation in career and technology education student organizations can promote lifelong responsibility for community service and professional development.', parent:`${prefix}-${n}`},
+  {code:`${prefix}-${n}.3`, desc:'Demonstrate teamwork, leadership, interpersonal relations, and project management skills.', parent:`${prefix}-${n}`},
+];
+
+// Grade 6 — Exploring Engineering & Technology (21.02100) — GA DOE, Apr 2019
+const SEED_STANDARDS_6 = [
+  {code:'MS-ENGR-EET-1', desc:'Demonstrate employability skills required by business and industry.', parent:null},
+  ...EMPLOYABILITY_SUB('MS-ENGR-EET'),
+  {code:'MS-ENGR-EET-2', desc:'Demonstrate proper safety techniques and tool usage in the Engineering and Technology Laboratory.', parent:null},
+  ...SAFETY_SUB('MS-ENGR-EET'),
+  {code:'MS-ENGR-EET-3', desc:'Identify engineering and technology and its impact on society.', parent:null},
+  {code:'MS-ENGR-EET-3.1', desc:'Explore the historical impacts of engineering & technology.', parent:'MS-ENGR-EET-3'},
+  {code:'MS-ENGR-EET-3.2', desc:'Examine the effects of engineering & technology on society including social, cultural, political, economic and environmental impacts.', parent:'MS-ENGR-EET-3'},
+  {code:'MS-ENGR-EET-3.3', desc:'Assess the impact(s) of technological products and systems.', parent:'MS-ENGR-EET-3'},
+  {code:'MS-ENGR-EET-3.4', desc:'Demonstrate an understanding of the Universal Systems Model.', parent:'MS-ENGR-EET-3'},
+  {code:'MS-ENGR-EET-4', desc:'Apply the Engineering Design Process to generate a solution to hands-on design challenges.', parent:null},
+  {code:'MS-ENGR-EET-4.1', desc:'Examine the engineering design attributes.', parent:'MS-ENGR-EET-4'},
+  {code:'MS-ENGR-EET-4.2', desc:'Demonstrate the principles of research and design.', parent:'MS-ENGR-EET-4'},
+  {code:'MS-ENGR-EET-4.3', desc:'Use math and science to create solutions to engineering problems.', parent:'MS-ENGR-EET-4'},
+  {code:'MS-ENGR-EET-4.4', desc:'Utilize the engineering design process.', parent:'MS-ENGR-EET-4'},
+  {code:'MS-ENGR-EET-4.5', desc:'Use and maintain technological products and systems.', parent:'MS-ENGR-EET-4'},
+  {code:'MS-ENGR-EET-4.6', desc:'Apply the Universal Systems Model to existing systems.', parent:'MS-ENGR-EET-4'},
+  {code:'MS-ENGR-EET-4.7', desc:'Utilize an Engineering Notebook as a record of process.', parent:'MS-ENGR-EET-4'},
+  {code:'MS-ENGR-EET-5', desc:'Examine and research careers in fields related to engineering & technology.', parent:null},
+  {code:'MS-ENGR-EET-5.1', desc:'Investigate educational requirements, job responsibilities, employment trends, and opportunities within engineering and technology career pathways using credible sources.', parent:'MS-ENGR-EET-5'},
+  {code:'MS-ENGR-EET-5.2', desc:'Investigate earnings potential for engineering & technology careers.', parent:'MS-ENGR-EET-5'},
+  {code:'MS-ENGR-EET-5.3', desc:'Identify gender and diversity related issues in engineering & technology careers.', parent:'MS-ENGR-EET-5'},
+  {code:'MS-ENGR-EET-6', desc:'Explore how related career and technology student organizations (TSA) are integral parts of career and technology education courses.', parent:null},
+  ...TSA_SUB('MS-ENGR-EET', 6),
+];
+
+// Grade 7 — Invention & Innovation (21.02200) — GA DOE, Apr 2019
+const SEED_STANDARDS_7 = [
+  {code:'MS-ENGR-II-1', desc:'Demonstrate employability skills required by business and industry.', parent:null},
+  ...EMPLOYABILITY_SUB('MS-ENGR-II'),
+  {code:'MS-ENGR-II-2', desc:'Demonstrate proper safety techniques and tool usage in the Engineering and Technology Laboratory.', parent:null},
+  ...SAFETY_SUB('MS-ENGR-II'),
+  {code:'MS-ENGR-II-3', desc:'Investigate inventions and innovations and their impact in society.', parent:null},
+  {code:'MS-ENGR-II-3.1', desc:'Differentiate between invention and innovation.', parent:'MS-ENGR-II-3'},
+  {code:'MS-ENGR-II-3.2', desc:'Examine the role that Engineering & Technology and society play in the invention and innovation process.', parent:'MS-ENGR-II-3'},
+  {code:'MS-ENGR-II-3.3', desc:'Identify an important past and current invention or innovation and its impact on society.', parent:'MS-ENGR-II-3'},
+  {code:'MS-ENGR-II-3.4', desc:'Research an artifact related to Engineering and Technology that is at least 25 years old and how it has changed over time.', parent:'MS-ENGR-II-3'},
+  {code:'MS-ENGR-II-3.5', desc:'Examine the patent process and the protection of intellectual property.', parent:'MS-ENGR-II-3'},
+  {code:'MS-ENGR-II-4', desc:'Demonstrate an understanding of the Engineering Design Process through various problem-solving activities.', parent:null},
+  {code:'MS-ENGR-II-4.1', desc:'Describe the steps of the Engineering Design Process.', parent:'MS-ENGR-II-4'},
+  {code:'MS-ENGR-II-4.2', desc:'Construct a simple technological system.', parent:'MS-ENGR-II-4'},
+  {code:'MS-ENGR-II-4.3', desc:'Explain how your technological system operates.', parent:'MS-ENGR-II-4'},
+  {code:'MS-ENGR-II-4.4', desc:'Reverse engineer a consumer product.', parent:'MS-ENGR-II-4'},
+  {code:'MS-ENGR-II-4.5', desc:'Utilize an Engineering Design Notebook as a record of process.', parent:'MS-ENGR-II-4'},
+  {code:'MS-ENGR-II-5', desc:'Invent and/or innovate a technological product or system that addresses a societal need using the Engineering Design Process.', parent:null},
+  {code:'MS-ENGR-II-5.1', desc:'Research a societal problem.', parent:'MS-ENGR-II-5'},
+  {code:'MS-ENGR-II-5.2', desc:'Show evidence of the steps of the Engineering Design Process in an Engineering Design Notebook.', parent:'MS-ENGR-II-5'},
+  {code:'MS-ENGR-II-5.3', desc:'Construct a prototype or model of the solution to the societal problem.', parent:'MS-ENGR-II-5'},
+  {code:'MS-ENGR-II-5.4', desc:'Use mathematical and scientific reasoning as evidence to support an engineering solution.', parent:'MS-ENGR-II-5'},
+  {code:'MS-ENGR-II-6', desc:'Explore how related career and technology student organizations (TSA) are integral parts of career and technology education courses.', parent:null},
+  ...TSA_SUB('MS-ENGR-II', 6),
+];
+
+// Grade 8 — Technological Systems (21.02300) — GA DOE, Apr 2019
+const SEED_STANDARDS_8 = [
+  {code:'MS-ENGR-TS-1', desc:'Demonstrate employability skills required by business and industry.', parent:null},
+  ...EMPLOYABILITY_SUB('MS-ENGR-TS'),
+  {code:'MS-ENGR-TS-2', desc:'Demonstrate proper safety techniques and tool usage in the Engineering and Technology Laboratory.', parent:null},
+  ...SAFETY_SUB('MS-ENGR-TS'),
+  {code:'MS-ENGR-TS-3', desc:'Examine the variety of components that make up several examples of a system model.', parent:null},
+  {code:'MS-ENGR-TS-3.1', desc:'Understand the components of a systems model: input, process, output, feedback.', parent:'MS-ENGR-TS-3'},
+  {code:'MS-ENGR-TS-3.2', desc:'Compare open-looped and closed-looped systems.', parent:'MS-ENGR-TS-3'},
+  {code:'MS-ENGR-TS-3.3', desc:'Understand and identify the resources of technology.', parent:'MS-ENGR-TS-3'},
+  {code:'MS-ENGR-TS-3.4', desc:'Explore a variety of system types (e.g. mechanical, fluid, etc.).', parent:'MS-ENGR-TS-3'},
+  {code:'MS-ENGR-TS-3.5', desc:'Understand different types of subsystems and how they interact with each other.', parent:'MS-ENGR-TS-3'},
+  {code:'MS-ENGR-TS-4', desc:'Use the engineering design process along with the knowledge of a systems model in the production of a prototype solution to a design problem.', parent:null},
+  {code:'MS-ENGR-TS-4.1', desc:'Utilize the Design Process to create a prototype.', parent:'MS-ENGR-TS-4'},
+  {code:'MS-ENGR-TS-4.2', desc:'Identify how systems are used to solve problems.', parent:'MS-ENGR-TS-4'},
+  {code:'MS-ENGR-TS-4.3', desc:'Illustrate how the systems model is used in industry.', parent:'MS-ENGR-TS-4'},
+  {code:'MS-ENGR-TS-4.4', desc:'Apply mathematical and scientific reasoning for engineering design solution.', parent:'MS-ENGR-TS-4'},
+  {code:'MS-ENGR-TS-4.5', desc:'Utilize an Engineering Design Notebook to document the design process.', parent:'MS-ENGR-TS-4'},
+  {code:'MS-ENGR-TS-5', desc:'Develop an understanding of how humans interact with systems.', parent:null},
+  {code:'MS-ENGR-TS-5.1', desc:'Operate systems.', parent:'MS-ENGR-TS-5'},
+  {code:'MS-ENGR-TS-5.2', desc:'Maintain technological systems.', parent:'MS-ENGR-TS-5'},
+  {code:'MS-ENGR-TS-5.3', desc:'Troubleshoot technological systems.', parent:'MS-ENGR-TS-5'},
+  {code:'MS-ENGR-TS-6', desc:'Describe how technological systems continuously improve from one iteration to another.', parent:null},
+  {code:'MS-ENGR-TS-6.1', desc:'Illustrate the evolution of a variety of technological systems.', parent:'MS-ENGR-TS-6'},
+  {code:'MS-ENGR-TS-6.2', desc:'Investigate the cause of system failure or improvement.', parent:'MS-ENGR-TS-6'},
+  {code:'MS-ENGR-TS-6.3', desc:'Analyze the reason for the evolution of technological systems.', parent:'MS-ENGR-TS-6'},
+  {code:'MS-ENGR-TS-7', desc:'Explore how related career and technology student organizations (TSA) are integral parts of career and technology education courses.', parent:null},
+  ...TSA_SUB('MS-ENGR-TS', 7),
+];
+const SEED_STANDARDS_BY_GRADE = { '6': SEED_STANDARDS_6, '7': SEED_STANDARDS_7, '8': SEED_STANDARDS_8 };
+
+// ─── STORAGE (Claude artifact storage when available, else localStorage) ────
+const STORAGE_KEY = 'moroniUnifiedPlannerV1';
+const hasClaudeStorage = (typeof window !== 'undefined' && !!window.storage);
+function upgradePlaceholderStandards(data){
+  // If a grade still has the old sample codes (ETC-1/ETC-2/Safety-1), swap in the real GA CTAE standards
+  // without touching any lessons, units, events, or notes already saved.
+  ['6','7','8'].forEach(g=>{
+    const list = (data.standards && data.standards[g]) || [];
+    const looksLikePlaceholder = list.some(s=>['ETC-1','ETC-2','Safety-1'].includes(s.code));
+    if(looksLikePlaceholder || list.length===0){
+      data.standards[g] = JSON.parse(JSON.stringify(SEED_STANDARDS_BY_GRADE[g]));
+    }
+  });
+  return data;
+}
+function upgradeToPeriods(data){
+  // Add DI + 6 periods if this save predates period-based scheduling.
+  if(!data.periods || !data.periods.length){
+    data.periods = JSON.parse(JSON.stringify(DEFAULT_PERIODS));
+  }
+  if(!data.scheduleByPeriod) data.scheduleByPeriod = {};
+  data.periods.forEach(p=>{ if(!data.scheduleByPeriod[p.id]) data.scheduleByPeriod[p.id] = {}; });
+
+  // Migrate old lesson.date (single-schedule-per-lesson) into the first period linked to that grade.
+  (data.lessons||[]).forEach(l=>{
+    if(l.date){
+      const targetPeriod = data.periods.find(p=>p.gradeLink===l.grade) || data.periods[0];
+      if(targetPeriod){
+        data.scheduleByPeriod[targetPeriod.id][l.date] = l.id;
+      }
+      delete l.date;
+    }
+  });
+
+  // Migrate old per-grade day notes into the matching period's notes.
+  Object.keys(data.dayData||{}).forEach(dk=>{
+    const dd = data.dayData[dk];
+    if(dd && dd.gradeNotes && !dd.periodNotes){
+      dd.periodNotes = {};
+      data.periods.forEach(p=>{ dd.periodNotes[p.id] = []; });
+      ['6','7','8'].forEach(g=>{
+        const targetPeriod = data.periods.find(p=>p.gradeLink===g);
+        if(targetPeriod && dd.gradeNotes[g] && dd.gradeNotes[g].length){
+          dd.periodNotes[targetPeriod.id] = dd.periodNotes[targetPeriod.id].concat(dd.gradeNotes[g]);
+        }
+      });
+      delete dd.gradeNotes;
+    }
+    if(dd && !dd.periodNotes) dd.periodNotes = {};
+  });
+  return data;
+}
+async function loadData(){
+  let data = null;
+  if(hasClaudeStorage){
+    try{ const res = await window.storage.get(STORAGE_KEY, false); if(res && res.value) data = JSON.parse(res.value); }catch(e){}
+  }
+  if(!data){
+    try{ const raw = localStorage.getItem(STORAGE_KEY); if(raw) data = JSON.parse(raw); }catch(e){}
+  }
+  if(data) return upgradeToPeriods(upgradePlaceholderStandards(data));
+
+  const seed = buildSeedUnitsAndLessons();
+  const periods = JSON.parse(JSON.stringify(DEFAULT_PERIODS));
+  const scheduleByPeriod = {};
+  periods.forEach(p=> scheduleByPeriod[p.id] = {});
+  // Seed the example Unit 1 lessons into their matching period's schedule.
+  seed.lessons.forEach(l=>{
+    if(l.date){
+      const targetPeriod = periods.find(p=>p.gradeLink===l.grade);
+      if(targetPeriod) scheduleByPeriod[targetPeriod.id][l.date] = l.id;
+      delete l.date;
+    }
+  });
+  return {
+    units: seed.units, unitTargets: seed.unitTargets, lessons: seed.lessons,
+    standards: { '6': JSON.parse(JSON.stringify(SEED_STANDARDS_6)), '7': JSON.parse(JSON.stringify(SEED_STANDARDS_7)), '8': JSON.parse(JSON.stringify(SEED_STANDARDS_8)) },
+    periods, scheduleByPeriod,
+    events: {}, dayData: {}, tasks: [],
+  };
+}
+let DATA = null;
+async function saveData(){
+  const json = JSON.stringify(DATA);
+  if(hasClaudeStorage){ try{ await window.storage.set(STORAGE_KEY, json, false); return; }catch(e){} }
+  try{ localStorage.setItem(STORAGE_KEY, json); }catch(e){ console.warn('Could not save planner data', e); }
+}
+
+// ─── UI STATE (transient, not persisted) ────────────────────────────────────
+let ui = {
+  view: 'dashboard', currentYear: 2026, currentMonth: 8, currentDateStr: '',
+  eventType: 'work', taskDateMode: 'none',
+  gradeSub: { '6':'units', '7':'units', '8':'units' },
+  editingLessonId: null, modalGrade: '6', currentTags: [], currentFiles: [], editingTaskId: null,
+};
+
+function getSchoolStatus(dk) {
+  const se = SCHOOL_EVENTS[dk];
+  const d = new Date(dk + 'T12:00:00');
+  const dow = d.getDay();
+  if (se) return se;
+  if (dow === 0 || dow === 6) return { type: 'weekend', label: 'Weekend' };
+  const start = new Date('2026-08-04');
+  const end = new Date('2027-05-26');
+  if (d >= start && d <= end) return { type: 'school', label: 'School Day' };
+  return { type: 'other', label: '' };
+}
+
+// ─── VIEWS ──────────────────────────────────────────────────────────────────
+function showView(v) {
+  ['dashboard','tasks','settings','noteslog','annual','monthly','weekly','grade6','grade7','grade8','library'].forEach(x => {
+    const el = document.getElementById('view-' + x);
+    if(el) el.classList.toggle('active', x === v);
+  });
+  document.querySelectorAll('.section-subnav-tab[data-view]').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.view === v);
+  });
+  ui.view = v;
+  if (v === 'dashboard') renderDashboard();
+  if (v === 'annual') renderAnnual();
+  if (v === 'monthly') renderMonthly();
+  if (v === 'weekly') renderWeekly();
+  if (v === 'grade6') renderGrade('6');
+  if (v === 'grade7') renderGrade('7');
+  if (v === 'grade8') renderGrade('8');
+  if (v === 'library') renderLibrary();
+  if (v === 'noteslog') renderNotesLog();
+  renderTasksTray();
+  window.scrollTo(0,0);
+}
+function renderDashboard(){
+  const today = new Date();
+  document.getElementById('dashboard-date-line').textContent =
+    `${DAY_NAMES[today.getDay()]}, ${MONTH_NAMES[today.getMonth()]} ${today.getDate()}, ${today.getFullYear()}`;
+  const pending = DATA.tasks.filter(t=>!t.done);
+  const preview = document.getElementById('dash-tasks-preview');
+  if(!pending.length){ preview.textContent = 'Nothing pending — you\u2019re all caught up!'; }
+  else {
+    const overdueOrToday = pending.filter(t=>{
+      if(!t.dueDate) return false;
+      return t.dueDate <= todayStr();
+    });
+    preview.textContent = overdueOrToday.length
+      ? `${pending.length} pending — ${overdueOrToday.length} due now or overdue`
+      : `${pending.length} pending task${pending.length===1?'':'s'}`;
+  }
+}
+
+// ─── PENDING TASKS TRAY ──────────────────────────────────────────────────────
+function todayStr() { const t = new Date(); return dateKey(t.getFullYear(), t.getMonth()+1, t.getDate()); }
+function formatDateShort(dk) { const d = new Date(dk + 'T12:00:00'); return `${MONTH_NAMES[d.getMonth()].slice(0,3)} ${d.getDate()}`; }
+
+function renderTasksTray() {
+  const list = document.getElementById('tasks-list');
+  const today = todayStr();
+  const pending = DATA.tasks.filter(t=>!t.done).sort((a, b) => {
+    if (!a.dueDate && !b.dueDate) return 0;
+    if (!a.dueDate) return 1;
+    if (!b.dueDate) return -1;
+    return a.dueDate.localeCompare(b.dueDate);
+  });
+  document.getElementById('tasks-count').textContent = pending.length;
+
+  const pendingRow = t => {
+    let rowCls = 'task-row';
+    let dueHtml = '<span class="task-due no-date">Reminder</span>';
+    if (t.dueDate) {
+      const days = Math.floor((new Date(t.dueDate+'T12:00:00') - new Date(today+'T12:00:00')) / 86400000);
+      let dueCls = 'has-date'; let dueLabel = formatDateShort(t.dueDate);
+      if (days < 0) { dueCls = 'urgent-date'; dueLabel = `Overdue (${formatDateShort(t.dueDate)})`; rowCls += ' urgent'; }
+      else if (days === 0) { dueCls = 'urgent-date'; dueLabel = 'Due Today'; rowCls += ' urgent'; }
+      else if (days <= 2) { dueCls = 'soon-date'; dueLabel = `${formatDateShort(t.dueDate)} (in ${days}d)`; rowCls += ' soon'; }
+      dueHtml = `<span class="task-due ${dueCls}">${dueLabel}</span>`;
+    }
+    return `<div class="${rowCls}">
+      <div class="task-check" onclick="toggleTask('${t.id}')">✓</div>
+      <div class="task-text" onclick="openTaskModal('${t.id}')" title="Click to edit">${t.text}</div>
+      <span onclick="openTaskModal('${t.id}')" style="cursor:pointer;" title="Click to change due date">${dueHtml}</span>
+      <button class="task-del" onclick="deleteTask('${t.id}')">✕</button>
+    </div>`;
+  };
+
+  list.innerHTML = pending.length ? pending.map(pendingRow).join('') : '<div class="tasks-empty">No pending tasks. Click "+ Add Task" to create one.</div>';
+  renderCompletedTasks();
+}
+function refreshCompletedDateFilter(completedAll){
+  const sel = document.getElementById('completedDateFilter');
+  const prev = sel.value;
+  const dates = [...new Set(completedAll.map(t=>t.completedDate).filter(Boolean))].sort().reverse();
+  sel.innerHTML = '<option value="">All completion dates</option>' + dates.map(d=>`<option value="${d}">${formatDateShort(d)}</option>`).join('');
+  if(dates.includes(prev)) sel.value = prev;
+}
+function renderCompletedTasks(){
+  const listEl = document.getElementById('completed-list');
+  if(!listEl) return; // page not in DOM yet on first load
+  const q = (document.getElementById('completedSearch').value||'').trim().toLowerCase();
+  const dateFilter = document.getElementById('completedDateFilter').value;
+  const allCompleted = DATA.tasks.filter(t=>t.done).sort((a,b)=> (b.completedDate||'').localeCompare(a.completedDate||''));
+  refreshCompletedDateFilter(allCompleted);
+  document.getElementById('completed-count').textContent = allCompleted.length;
+  let filtered = allCompleted;
+  if(q) filtered = filtered.filter(t=>t.text.toLowerCase().includes(q));
+  if(dateFilter) filtered = filtered.filter(t=>t.completedDate===dateFilter);
+
+  const completedRow = t => `<div class="task-row done">
+      <div class="task-check checked" onclick="toggleTask('${t.id}')">✓</div>
+      <div class="task-text done" onclick="openTaskModal('${t.id}')" title="Click to edit">${t.text}</div>
+      <span class="task-due has-date" style="background:var(--personal-light);color:var(--personal);">Done ${t.completedDate ? formatDateShort(t.completedDate) : ''}</span>
+      <button class="task-del" onclick="deleteTask('${t.id}')">✕</button>
+    </div>`;
+  listEl.innerHTML = filtered.length ? filtered.map(completedRow).join('') : `<div class="tasks-empty">${allCompleted.length ? 'No completed tasks match — try clearing a filter.' : 'Nothing completed yet.'}</div>`;
+}
+['completedSearch','completedDateFilter'].forEach(id=>{
+  const el = document.getElementById(id);
+  if(el) el.addEventListener('input', renderCompletedTasks);
+});
+function toggleTask(id) {
+  const t = DATA.tasks.find(x => x.id === id);
+  if (t){ t.done = !t.done; t.completedDate = t.done ? todayStr() : null; }
+  saveData(); renderTasksTray();
+}
+function deleteTask(id) { DATA.tasks = DATA.tasks.filter(x => x.id !== id); saveData(); renderTasksTray(); }
+
+function openTaskModal(taskId) {
+  ui.editingTaskId = taskId || null;
+  const t = taskId ? DATA.tasks.find(x=>x.id===taskId) : null;
+  document.getElementById('task-modal-title').textContent = t ? 'Edit Task' : '📌 Add Task';
+  document.getElementById('task-text-input').value = t ? t.text : '';
+  document.getElementById('task-date-input').value = t && t.dueDate ? t.dueDate : '';
+  document.getElementById('taskDeleteBtn').style.display = t ? 'inline-block' : 'none';
+  setTaskDateMode(t && t.dueDate ? 'date' : 'none');
+  document.getElementById('task-modal-overlay').classList.add('open');
+  setTimeout(() => document.getElementById('task-text-input').focus(), 100);
+}
+function closeTaskModal() { document.getElementById('task-modal-overlay').classList.remove('open'); ui.editingTaskId = null; }
+function closeTaskModalOnBg(e) { if (e.target === document.getElementById('task-modal-overlay')) closeTaskModal(); }
+function setTaskDateMode(mode) {
+  ui.taskDateMode = mode;
+  document.getElementById('task-date-mode-none').classList.toggle('active', mode === 'none');
+  document.getElementById('task-date-mode-has').classList.toggle('active', mode === 'date');
+  document.getElementById('task-date-input').style.display = mode === 'date' ? 'block' : 'none';
+}
+function saveTask() {
+  const text = document.getElementById('task-text-input').value.trim();
+  if (!text) return;
+  const dueDate = ui.taskDateMode === 'date' ? document.getElementById('task-date-input').value : null;
+  if(ui.editingTaskId){
+    const t = DATA.tasks.find(x=>x.id===ui.editingTaskId);
+    if(t){ t.text = text; t.dueDate = dueDate || null; }
+  } else {
+    DATA.tasks.push({ id: 't' + Date.now(), text, dueDate: dueDate || null, done: false });
+  }
+  saveData(); closeTaskModal(); renderTasksTray(); if(ui.view==='dashboard') renderDashboard();
+}
+function deleteTaskFromModal(){
+  if(!ui.editingTaskId) return;
+  const id = ui.editingTaskId;
+  showConfirm({ title:'Delete this task?', message:'This can\u2019t be undone.', okLabel:'Delete', onOk:()=>{
+    DATA.tasks = DATA.tasks.filter(x=>x.id!==id); saveData(); closeTaskModal(); renderTasksTray();
+  }});
+}
+
+// ─── ANNUAL ──────────────────────────────────────────────────────────────────
+function renderAnnual() {
+  const grid = document.getElementById('annual-months');
+  grid.innerHTML = '';
+  const today = new Date();
+  const todayKey = dateKey(today.getFullYear(), today.getMonth()+1, today.getDate());
+
+  MONTHS.forEach(({ year, month }) => {
+    const card = document.createElement('div');
+    card.className = 'month-card';
+    const daysInMonth = new Date(year, month, 0).getDate();
+    const firstDay = new Date(year, month - 1, 1).getDay();
+    const mn = MONTH_NAMES[month - 1];
+
+    let workCount = 0, personalCount = 0;
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dk = dateKey(year, month, d);
+      (DATA.events[dk] || []).forEach(e => { if (e.type === 'work') workCount++; else personalCount++; });
+    }
+    let badges = '';
+    if (workCount) badges += `<span class="badge badge-work">${workCount} work</span>`;
+    if (personalCount) badges += `<span class="badge badge-personal">${personalCount} personal</span>`;
+
+    let miniDays = '';
+    for (let i = 0; i < firstDay; i++) miniDays += '<div class="mini-day empty"></div>';
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dk = dateKey(year, month, d);
+      const se = getSchoolStatus(dk);
+      const evs = DATA.events[dk] || [];
+      const hasWork = evs.some(e => e.type === 'work');
+      const hasPers = evs.some(e => e.type === 'personal');
+      const dow = new Date(dk + 'T12:00:00').getDay();
+      let cls = 'mini-day';
+      if (dk === todayKey) cls += ' today';
+      else if (se.type === 'holiday') cls += ' holiday';
+      else if (se.type === 'break') cls += ' break-day';
+      else if (se.type === 'noschool') cls += ' no-school';
+      else if (dow === 0 || dow === 6) cls += ' weekend';
+      if (hasWork) cls += ' has-work';
+      if (hasPers) cls += ' has-personal';
+      miniDays += `<div class="${cls}" onclick="openDay('${dk}','${year}',${month},${d})">${d}<div class="mini-day-add" onclick="event.stopPropagation();openModalForDate('${dk}')">+</div></div>`;
+    }
+
+    card.innerHTML = `
+      <div class="month-header" onclick="openMonth(${year},${month})">
+        <h3>${mn} ${year}</h3>
+        <div style="display:flex;gap:4px">${badges}</div>
+      </div>
+      <div class="mini-cal">
+        <div class="mini-cal-weekdays"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
+        <div class="mini-cal-days">${miniDays}</div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+function openMonth(year, month) { ui.currentYear = year; ui.currentMonth = month; showView('monthly'); }
+function openDay(dk, year, month, day) { ui.currentDateStr = dk; ui.currentYear = year; ui.currentMonth = month; showView('weekly'); }
+
+// ─── MONTHLY ──────────────────────────────────────────────────────────────────
+function shiftMonth(dir) {
+  ui.currentMonth += dir;
+  if (ui.currentMonth > 12) { ui.currentMonth = 1; ui.currentYear++; }
+  if (ui.currentMonth < 1) { ui.currentMonth = 12; ui.currentYear--; }
+  renderMonthly();
+}
+function renderMonthly() {
+  const year = ui.currentYear, month = ui.currentMonth;
+  document.getElementById('monthly-title').textContent = `${MONTH_NAMES[month-1]} ${year}`;
+  const daysInMonth = new Date(year, month, 0).getDate();
+  const firstDay = new Date(year, month - 1, 1).getDay();
+  const today = new Date();
+  const todayKey = dateKey(today.getFullYear(), today.getMonth()+1, today.getDate());
+  const grid = document.getElementById('monthly-days');
+  grid.innerHTML = '';
+  for (let i = 0; i < firstDay; i++) { const c = document.createElement('div'); c.className = 'full-day empty'; grid.appendChild(c); }
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dk = dateKey(year, month, d);
+    const se = getSchoolStatus(dk);
+    const dow = new Date(dk + 'T12:00:00').getDay();
+    let cls = 'full-day';
+    if (dk === todayKey) cls += ' today';
+    else if (se.type === 'holiday') cls += ' holiday';
+    else if (se.type === 'break') cls += ' break-day';
+    else if (se.type === 'noschool') cls += ' no-school';
+    else if (dow === 0 || dow === 6) cls += ' weekend';
+    let labelHtml = '';
+    if (se.type === 'holiday') labelHtml = `<div class="school-label holiday-lbl">${se.label}</div>`;
+    else if (se.type === 'break') labelHtml = `<div class="school-label break-lbl">${se.label}</div>`;
+    else if (se.type === 'noschool') labelHtml = `<div class="school-label noschool-lbl">${se.label}</div>`;
+    else if (se.type === 'school' && se.label !== 'School Day') labelHtml = `<div class="school-label">${se.label}</div>`;
+    const evs = DATA.events[dk] || [];
+    const evHtml = evs.map(e => `<div class="day-event ${e.type}"><span class="day-event-label">${e.title}</span><span class="day-event-del" onclick="event.stopPropagation();deleteEvent('${dk}','${e.title}','${e.type}')">✕</span></div>`).join('');
+    const cell = document.createElement('div');
+    cell.className = cls;
+    cell.innerHTML = `
+      <div class="day-num">${d}</div>
+      ${labelHtml}
+      <div class="day-events">${evHtml}</div>
+      <div class="add-event-mini" onclick="event.stopPropagation();openModalForDate('${dk}')">+</div>
+    `;
+    cell.addEventListener('click', (e)=>{ if(!e.target.classList.contains('add-event-mini') && !e.target.classList.contains('day-event-del')) openDay(dk, year, month, d); });
+    grid.appendChild(cell);
+  }
+}
+
+// ─── WEEKLY (rotated grid: rows = 6th/7th/8th + Notes, cols = 7 days) ───────
+function getWeekStart(dk) { const d = new Date(dk + 'T12:00:00'); const day = d.getDay(); const diff = day===0 ? -6 : 1-day; d.setDate(d.getDate() + diff); return d; }
+function shiftWeek(dir) {
+  const d = new Date(ui.currentDateStr + 'T12:00:00');
+  d.setDate(d.getDate() + dir * 7);
+  ui.currentDateStr = dateKey(d.getFullYear(), d.getMonth()+1, d.getDate());
+  renderWeekly();
+}
+function ensureDayData(dk){
+  if (!DATA.dayData[dk]) DATA.dayData[dk] = { notes: [], periodNotes: {} };
+  if(!DATA.dayData[dk].notes) DATA.dayData[dk].notes = [];
+  if(!DATA.dayData[dk].periodNotes) DATA.dayData[dk].periodNotes = {};
+  DATA.periods.forEach(p=>{ if(!DATA.dayData[dk].periodNotes[p.id]) DATA.dayData[dk].periodNotes[p.id] = []; });
+}
+const PERIOD_COLORS = ['#2563EB','#16A34A','#EA580C','#9333EA','#0891B2','#DB2777','#65A30D','#CA8A04'];
+function periodColor(periodId){
+  const idx = DATA.periods.findIndex(p=>p.id===periodId);
+  return PERIOD_COLORS[idx % PERIOD_COLORS.length] || '#2563EB';
+}
+function periodById(id){ return DATA.periods.find(p=>p.id===id); }
+
+function scheduleForPeriod(periodId){ if(!DATA.scheduleByPeriod[periodId]) DATA.scheduleByPeriod[periodId] = {}; return DATA.scheduleByPeriod[periodId]; }
+function lessonsOnDateForPeriod(periodId, dk){
+  const sched = scheduleForPeriod(periodId);
+  const out = [];
+  Object.keys(sched).forEach(startDate=>{
+    const lesson = DATA.lessons.find(l=>l.id===sched[startDate]);
+    if(!lesson) return;
+    if(startDate===dk){ out.push({lesson, isGhost:false}); return; }
+    const span = lesson.duration||1;
+    if(span<=1) return;
+    const start = new Date(startDate+'T00:00:00');
+    const end = new Date(start); end.setDate(end.getDate()+span-1);
+    const cur = new Date(dk+'T00:00:00');
+    if(cur > start && cur <= end) out.push({lesson, isGhost:true});
+  });
+  return out;
+}
+function lessonCellHtml(period, dk){
+  ensureDayData(dk);
+  const entries = lessonsOnDateForPeriod(period.id, dk);
+  const grade = period.gradeLink;
+  const cards = entries.map(({lesson:l, isGhost})=>{
+    const uName = grade ? unitName(grade, l.unitId) : '';
+    return `<div class="lesson-chip ${isGhost?'ghost':''}">
+      <div class="lc-title" onclick="openLessonModal('${l.id}')">${l.title||'(untitled)'}${isGhost?' <span style="font-size:9px;color:var(--text-light)">(cont\u2019d)</span>':''}</div>
+      <div class="lc-unit">${uName}${(l.duration||1)>1?' · '+l.duration+'d':''}</div>
+      ${isGhost ? '' : `<div class="lc-actions"><button onclick="unscheduleLesson('${period.id}','${dk}')">Unschedule</button></div>`}
+    </div>`;
+  }).join('');
+  let assignHtml;
+  if(!grade){
+    assignHtml = `<div class="assign-noGrade">Set a grade for "${period.name}" to assign lessons ⚙️</div>`;
+  } else {
+    const unitOpts = (DATA.units[grade]||[]).map(u=>{
+      const opts = DATA.lessons.filter(l=>l.grade===grade && l.unitId===u.id).map(l=>`<option value="${l.id}">${l.title||'(untitled)'}</option>`).join('');
+      return opts ? `<optgroup label="${u.name}">${opts}</optgroup>` : '';
+    }).join('');
+    assignHtml = `<select class="assign-select" onchange="assignLessonToDate(this.value,'${period.id}','${dk}');this.value=''"><option value="">+ Assign lesson...</option>${unitOpts}</select>`;
+  }
+  const pnotes = DATA.dayData[dk].periodNotes[period.id] || [];
+  const notesHtml = pnotes.map((item, idx) => `
+    <div class="week-item ${item.done ? 'done' : ''}">
+      <div class="week-item-check ${item.done?'checked notes':''}" onclick="periodNoteToggle('${dk}','${period.id}',${idx})"></div>
+      <div class="week-item-text">${item.text}</div>
+      <button class="week-item-del" onclick="periodNoteDelete('${dk}','${period.id}',${idx})">✕</button>
+    </div>`).join('');
+  return `${cards}${assignHtml}
+    ${notesHtml}
+    <input class="week-add-input" placeholder="+ note (e.g. buy materials)" onkeydown="if(event.key==='Enter'){periodNoteAdd('${dk}','${period.id}',this)}">`;
+}
+function periodNoteAdd(dk, periodId, inputEl){
+  const text = inputEl.value.trim(); if(!text) return;
+  ensureDayData(dk); DATA.dayData[dk].periodNotes[periodId].push({text, done:false});
+  saveData(); renderWeekly();
+}
+function periodNoteToggle(dk, periodId, idx){ DATA.dayData[dk].periodNotes[periodId][idx].done = !DATA.dayData[dk].periodNotes[periodId][idx].done; saveData(); renderWeekly(); }
+function periodNoteDelete(dk, periodId, idx){ DATA.dayData[dk].periodNotes[periodId].splice(idx,1); saveData(); renderWeekly(); }
+
+// ─── NOTES LOG (all notes, from every day/period, in one searchable place) ──
+function collectAllNotes(){
+  const out = [];
+  Object.keys(DATA.dayData||{}).sort().reverse().forEach(dk=>{
+    const dd = DATA.dayData[dk];
+    (dd.notes||[]).forEach((n,idx)=> out.push({dk, where:'General', text:n.text, done:n.done, kind:'general', idx}));
+    Object.keys(dd.periodNotes||{}).forEach(periodId=>{
+      const p = periodById(periodId);
+      (dd.periodNotes[periodId]||[]).forEach((n,idx)=> out.push({dk, where: p ? p.name : 'Deleted period', text:n.text, done:n.done, kind:'period', periodId, idx}));
+    });
+  });
+  return out;
+}
+function refreshNotesLogFilters(all){
+  const dateSel = document.getElementById('notesLogDateFilter');
+  const wherSel = document.getElementById('notesLogWhereFilter');
+  const prevDate = dateSel.value, prevWhere = wherSel.value;
+  const dates = [...new Set(all.map(n=>n.dk))].sort().reverse();
+  dateSel.innerHTML = '<option value="">All dates</option>' + dates.map(dk=>`<option value="${dk}">${formatDateShort(dk)}</option>`).join('');
+  const wheres = [...new Set(all.map(n=>n.where))].sort();
+  wherSel.innerHTML = '<option value="">All (General + periods)</option>' + wheres.map(w=>`<option value="${w}">${w}</option>`).join('');
+  if(dates.includes(prevDate)) dateSel.value = prevDate;
+  if(wheres.includes(prevWhere)) wherSel.value = prevWhere;
+}
+function renderNotesLog(){
+  const q = document.getElementById('notesLogSearch').value.trim().toLowerCase();
+  const dateFilter = document.getElementById('notesLogDateFilter').value;
+  const whereFilter = document.getElementById('notesLogWhereFilter').value;
+  const statusFilter = document.getElementById('notesLogStatusFilter').value;
+  let all = collectAllNotes();
+  refreshNotesLogFilters(all);
+  if(q) all = all.filter(n=> n.text.toLowerCase().includes(q));
+  if(dateFilter) all = all.filter(n=> n.dk===dateFilter);
+  if(whereFilter) all = all.filter(n=> n.where===whereFilter);
+  if(statusFilter==='pending') all = all.filter(n=> !n.done);
+  if(statusFilter==='done') all = all.filter(n=> n.done);
+  const body = document.getElementById('notesLogBody');
+  body.innerHTML = all.length ? '' : `<tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:24px;">No notes match — try clearing a filter.</td></tr>`;
+  all.forEach(n=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="mono" style="font-size:11px;">${formatDateShort(n.dk)}</td>
+      <td><span class="chip-mini">${n.where}</span></td>
+      <td style="${n.done?'text-decoration:line-through;color:var(--text-light);':''}">${n.text}</td>
+      <td><button class="print-btn" style="padding:4px 9px;font-size:10.5px;" onclick="convertNoteToTask('${(n.text||'').replace(/'/g,"\\\\'")}')">→ Task</button></td>
+      <td><button class="ulr-del" onclick="deleteNoteFromLog('${n.dk}','${n.kind}','${n.periodId||''}',${n.idx})">✕</button></td>
+    `;
+    body.appendChild(tr);
+  });
+}
+function convertNoteToTask(text){
+  openTaskModal();
+  document.getElementById('task-text-input').value = text;
+  showToast('Now add a due date if it needs one, then Save ✓');
+}
+function deleteNoteFromLog(dk, kind, periodId, idx){
+  if(kind==='general'){ DATA.dayData[dk].notes.splice(idx,1); }
+  else { DATA.dayData[dk].periodNotes[periodId].splice(idx,1); }
+  saveData(); renderNotesLog();
+}
+['notesLogSearch','notesLogDateFilter','notesLogWhereFilter','notesLogStatusFilter'].forEach(id=>{
+  document.getElementById(id).addEventListener('input', renderNotesLog);
+});
+function assignLessonToDate(lessonId, periodId, dk){
+  if(!lessonId) return;
+  scheduleForPeriod(periodId)[dk] = lessonId;
+  saveData(); if(ui.view==='weekly') renderWeekly(); showToast('Lesson scheduled ✓');
+}
+function unscheduleLesson(periodId, dk){
+  const sched = scheduleForPeriod(periodId);
+  delete sched[dk];
+  saveData(); if(ui.view==='weekly') renderWeekly(); showToast('Removed from this period\u2019s calendar (still in Curriculum Map)');
+}
+
+// ─── PERIOD MANAGEMENT ───────────────────────────────────────────────────────
+function addPeriod(){
+  DATA.periods.push({ id: uid('p'), name:'New period', time:'', gradeLink:'' });
+  saveData(); renderWeekly();
+  showToast('Period added — rename it and set a grade ✓');
+}
+function deletePeriod(periodId){
+  const hasSchedule = Object.keys(scheduleForPeriod(periodId)).length>0;
+  const doDelete = ()=>{
+    DATA.periods = DATA.periods.filter(p=>p.id!==periodId);
+    delete DATA.scheduleByPeriod[periodId];
+    Object.keys(DATA.dayData).forEach(dk=>{ if(DATA.dayData[dk].periodNotes) delete DATA.dayData[dk].periodNotes[periodId]; });
+    saveData(); renderWeekly();
+    showToast('Period deleted');
+  };
+  showConfirm({
+    title:'Delete this period?',
+    message: hasSchedule ? 'This period has lessons scheduled to it. Those lessons stay in your Curriculum Map, but they will be removed from this period\u2019s calendar.' : 'This can\u2019t be undone.',
+    okLabel:'Delete period', onOk: doDelete
+  });
+}
+function movePeriodToPosition(periodId, newPos){
+  const arr = DATA.periods;
+  const idx = arr.findIndex(p=>p.id===periodId);
+  if(idx<0) return;
+  const [item] = arr.splice(idx,1);
+  const clamped = Math.max(0, Math.min(arr.length, newPos-1));
+  arr.splice(clamped, 0, item);
+  saveData(); renderWeekly();
+}
+function updatePeriodField(periodId, field, value){
+  const p = periodById(periodId); if(!p) return;
+  p[field] = value; saveData();
+  if(field==='gradeLink') renderWeekly();
+}
+
+function renderWeekly() {
+  const weekStart = getWeekStart(ui.currentDateStr);
+  const today = new Date();
+  const todayKey = dateKey(today.getFullYear(), today.getMonth()+1, today.getDate());
+  const weekEnd = new Date(weekStart); weekEnd.setDate(weekEnd.getDate()+4);
+  document.getElementById('weekly-title').textContent =
+    `${MONTH_NAMES[weekStart.getMonth()]} ${weekStart.getDate()} – ${weekEnd.getMonth()!==weekStart.getMonth() ? MONTH_NAMES[weekEnd.getMonth()]+' ':''}${weekEnd.getDate()}, ${weekEnd.getFullYear()}`;
+
+  const days = [];
+  for (let i = 0; i < 5; i++) {
+    const d = new Date(weekStart); d.setDate(d.getDate()+i);
+    const dk = dateKey(d.getFullYear(), d.getMonth()+1, d.getDate());
+    ensureDayData(dk);
+    days.push({ d, dk });
+  }
+
+  let html = '<thead><tr><th></th>';
+  days.forEach(({d, dk}) => {
+    const se = getSchoolStatus(dk);
+    let tag = '';
+    if (se.type === 'holiday') tag = `<div class="week-day-tag holiday">${se.label}</div>`;
+    else if (se.type === 'break') tag = `<div class="week-day-tag break-tag">${se.label}</div>`;
+    else if (se.type === 'noschool') tag = `<div class="week-day-tag noschool">${se.label}</div>`;
+    else if (se.type === 'school') tag = `<div class="week-day-tag workday">${se.label === 'School Day' ? 'School Day' : se.label}</div>`;
+    const isToday = dk === todayKey ? ' is-today' : '';
+    html += `<th><div class="week-day-head${isToday}" onclick="openDay('${dk}','${d.getFullYear()}',${d.getMonth()+1},${d.getDate()})">
+      <div class="week-day-name">${DAY_NAMES[d.getDay()].slice(0,3)}</div>
+      <div class="week-day-num">${d.getDate()}</div>
+      ${tag}
+    </div></th>`;
+  });
+  html += '</tr></thead><tbody>';
+
+  html += '<tr><td class="week-row-label" style="background:#F1F5F9;color:var(--text-muted)">Events</td>';
+  days.forEach(({dk}) => {
+    const evs = DATA.events[dk] || [];
+    const pills = evs.map(e => `<div class="week-event-pill ${e.type}">${e.type==='work'?'🔵':'🟢'} ${e.title}<span class="week-event-del" onclick="deleteEvent('${dk}','${e.title}','${e.type}')">✕</span></div>`).join('');
+    html += `<td class="week-events-cell">${pills}<button class="week-add-event-btn" onclick="openModalForDate('${dk}')">+ Add event</button></td>`;
+  });
+  html += '</tr>';
+
+  DATA.periods.forEach((p, pIdx) => {
+    const color = periodColor(p.id);
+    const posOptions = Array.from({length:DATA.periods.length}, (_,i)=>`<option value="${i+1}" ${i===pIdx?'selected':''}>${i+1}</option>`).join('');
+    html += `<tr>
+      <td class="week-row-label" style="background:${color}18;color:${color};border-left:3px solid ${color}">
+        <input class="period-name-input" style="color:${color}" value="${p.name}" onchange="updatePeriodField('${p.id}','name',this.value)">
+        <input class="period-time-input" placeholder="time (e.g. 9:10-10:00)" value="${p.time||''}" onchange="updatePeriodField('${p.id}','time',this.value)">
+        <select class="period-grade-select" onchange="updatePeriodField('${p.id}','gradeLink',this.value)">
+          <option value="">No grade set</option>
+          <option value="6" ${p.gradeLink==='6'?'selected':''}>6th grade</option>
+          <option value="7" ${p.gradeLink==='7'?'selected':''}>7th grade</option>
+          <option value="8" ${p.gradeLink==='8'?'selected':''}>8th grade</option>
+        </select>
+        <div class="period-row-actions">
+          <select class="period-pos-select" onchange="movePeriodToPosition('${p.id}', Number(this.value))">${posOptions}</select>
+          <button class="period-del-btn" onclick="deletePeriod('${p.id}')" title="Delete period">✕</button>
+        </div>
+      </td>`;
+    days.forEach(({dk}) => { html += `<td class="week-cell" style="border-top:3px solid ${color}">${lessonCellHtml(p, dk)}</td>`; });
+    html += '</tr>';
+  });
+
+  html += `<tr><td class="week-row-label notes">Notes</td>`;
+  days.forEach(({dk}) => {
+    const items = DATA.dayData[dk].notes || [];
+    const itemsHtml = items.map((item, idx) => `
+      <div class="week-item ${item.done ? 'done' : ''}">
+        <div class="week-item-check notes ${item.done?'checked':''}" onclick="weekToggleCheck('${dk}',${idx})"></div>
+        <div class="week-item-text">${item.text}</div>
+        <button class="week-item-copy" title="Copy to other days" onclick="openCopyModal('${dk}',${idx})">⧉</button>
+        <button class="week-item-del" onclick="weekDeleteItem('${dk}',${idx})">✕</button>
+      </div>`).join('');
+    html += `<td class="week-cell notes">${itemsHtml}<input class="week-add-input" placeholder="+ add note..." onkeydown="if(event.key==='Enter'){weekAddItem('${dk}',this)}"></td>`;
+  });
+  html += '</tr>';
+
+  html += '</tbody>';
+  document.getElementById('weekly-table').innerHTML = html;
+}
+function weekAddItem(dk, inputEl) {
+  const text = inputEl.value.trim(); if (!text) return;
+  ensureDayData(dk); DATA.dayData[dk].notes.push({ text, done: false });
+  saveData(); inputEl.value = ''; renderWeekly();
+}
+function weekToggleCheck(dk, idx) { DATA.dayData[dk].notes[idx].done = !DATA.dayData[dk].notes[idx].done; saveData(); renderWeekly(); }
+function weekDeleteItem(dk, idx) { DATA.dayData[dk].notes.splice(idx, 1); saveData(); renderWeekly(); }
+
+// ─── COPY NOTE TO OTHER DAYS ─────────────────────────────────────────────────
+let copySource = null;
+function openCopyModal(dk, idx) {
+  const item = DATA.dayData[dk].notes[idx];
+  copySource = { dk, idx, text: item.text };
+  document.getElementById('copy-task-text').value = item.text;
+  const weekStart = getWeekStart(ui.currentDateStr);
+  const list = document.getElementById('copy-days-list');
+  list.innerHTML = '';
+  for (let i = 0; i < 5; i++) {
+    const d = new Date(weekStart); d.setDate(d.getDate()+i);
+    const odk = dateKey(d.getFullYear(), d.getMonth()+1, d.getDate());
+    if (odk === dk) continue;
+    const id = `copyday-${i}`;
+    list.insertAdjacentHTML('beforeend', `<label class="copy-day-option" for="${id}"><input type="checkbox" id="${id}" value="${odk}"> ${DAY_NAMES[d.getDay()]}, ${MONTH_NAMES[d.getMonth()]} ${d.getDate()}</label>`);
+  }
+  document.getElementById('copy-modal-overlay').classList.add('open');
+}
+function closeCopyModal() { document.getElementById('copy-modal-overlay').classList.remove('open'); copySource = null; }
+function closeCopyModalOnBg(e) { if (e.target === document.getElementById('copy-modal-overlay')) closeCopyModal(); }
+function confirmCopy() {
+  if (!copySource) return;
+  document.querySelectorAll('#copy-days-list input:checked').forEach(cb => {
+    const odk = cb.value;
+    ensureDayData(odk);
+    DATA.dayData[odk].notes.push({ text: copySource.text, done: false });
+  });
+  saveData(); closeCopyModal(); renderWeekly();
+}
+
+// ─── EVENTS ──────────────────────────────────────────────────────────────────
+function openModal() {
+  const today = new Date();
+  const defaultDate = ui.currentDateStr || dateKey(today.getFullYear(), today.getMonth()+1, today.getDate());
+  document.getElementById('event-date-input').value = defaultDate;
+  document.getElementById('event-name-input').value = '';
+  document.getElementById('modal-title').textContent = 'Add Event';
+  setEventType('work');
+  document.getElementById('modal-overlay').classList.add('open');
+  setTimeout(() => document.getElementById('event-name-input').focus(), 100);
+}
+function openModalForDate(dk) {
+  document.getElementById('event-date-input').value = dk;
+  document.getElementById('event-name-input').value = '';
+  document.getElementById('modal-title').textContent = 'Add Event';
+  setEventType('work');
+  document.getElementById('modal-overlay').classList.add('open');
+  setTimeout(() => document.getElementById('event-name-input').focus(), 100);
+}
+function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+function closeModalOnBg(e) { if (e.target === document.getElementById('modal-overlay')) closeModal(); }
+function setEventType(t) {
+  ui.eventType = t;
+  document.getElementById('type-work-btn').classList.toggle('active', t === 'work');
+  document.getElementById('type-personal-btn').classList.toggle('active', t === 'personal');
+}
+function saveEvent() {
+  const title = document.getElementById('event-name-input').value.trim();
+  const dk = document.getElementById('event-date-input').value;
+  if (!title || !dk) return;
+  if (!DATA.events[dk]) DATA.events[dk] = [];
+  DATA.events[dk].push({ type: ui.eventType, title });
+  saveData(); closeModal();
+  if (ui.view === 'annual') renderAnnual(); else if (ui.view === 'monthly') renderMonthly();
+  else if (ui.view === 'weekly') renderWeekly();
+}
+function deleteEvent(dk, title, type) {
+  if (!DATA.events[dk]) return;
+  DATA.events[dk] = DATA.events[dk].filter(e => !(e.title === title && e.type === type));
+  if (!DATA.events[dk].length) delete DATA.events[dk];
+  saveData();
+  if (ui.view === 'annual') renderAnnual(); else if (ui.view === 'monthly') renderMonthly();
+  else if (ui.view === 'weekly') renderWeekly();
+}
+
+// ─── CUSTOM CONFIRM MODAL ─────────────────────────────────────────────────────
+const confirmOverlay = document.getElementById('confirm-overlay');
+function showConfirm(opts){
+  const o = Object.assign({title:'Are you sure?', message:'', okLabel:'Delete', okOnly:false, onOk:null}, opts);
+  document.getElementById('confirmTitle').textContent = o.title;
+  document.getElementById('confirmMsg').textContent = o.message;
+  const okBtn = document.getElementById('confirmOkBtn');
+  const cancelBtn = document.getElementById('confirmCancelBtn');
+  okBtn.textContent = o.okLabel;
+  cancelBtn.style.display = o.okOnly ? 'none' : 'inline-block';
+  confirmOverlay.classList.add('open');
+  const cleanup = ()=>{ confirmOverlay.classList.remove('open'); okBtn.onclick=null; cancelBtn.onclick=null; };
+  okBtn.onclick = ()=>{ cleanup(); if(o.onOk) o.onOk(); };
+  cancelBtn.onclick = cleanup;
+}
+
+// ─── TOAST (lightweight, reuses tasks tray style) ────────────────────────────
+function showToast(msg){
+  let t = document.getElementById('mp-toast');
+  if(!t){
+    t = document.createElement('div'); t.id='mp-toast';
+    t.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--header-bg);color:#fff;padding:11px 20px;border-radius:8px;font-size:13px;z-index:300;opacity:0;pointer-events:none;transition:opacity .25s ease;max-width:90vw;text-align:center;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg; t.style.opacity = '1';
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer = setTimeout(()=>{ t.style.opacity='0'; }, 2400);
+}
+
+// ─── GRADE VIEWS: UNITS ──────────────────────────────────────────────────────
+function unitById(grade, id){ return (DATA.units[grade]||[]).find(u=>u.id===id); }
+function unitName(grade, id){ const u = unitById(grade,id); return u ? u.name : ''; }
+function lessonsForGrade(grade){ return DATA.lessons.filter(l=>l.grade===grade); }
+function statusLabel(){ return ''; }
+
+document.querySelectorAll('.subnav').forEach(nav=>{
+  nav.addEventListener('click', e=>{
+    const btn = e.target.closest('.subnav-tab');
+    if(!btn) return;
+    const grade = nav.dataset.grade;
+    ui.gradeSub[grade] = btn.dataset.sub;
+    renderGradeSubTabs(grade);
+  });
+});
+function renderGradeSubTabs(grade){
+  const nav = document.querySelector(`.subnav[data-grade="${grade}"]`);
+  nav.querySelectorAll('.subnav-tab').forEach(b=> b.classList.toggle('active', b.dataset.sub===ui.gradeSub[grade]));
+  document.getElementById(`subview-units-${grade}`).classList.toggle('active', ui.gradeSub[grade]==='units');
+  document.getElementById(`subview-standards-${grade}`).classList.toggle('active', ui.gradeSub[grade]==='standards');
+}
+function renderGrade(grade){
+  renderGradeSubTabs(grade);
+  renderUnits(grade);
+  renderStandards(grade);
+}
+
+function renderUnits(grade){
+  const wrap = document.getElementById('unitsWrap-'+grade);
+  wrap.innerHTML = '';
+  const units = DATA.units[grade];
+  if(!DATA.unitTargets[grade]) DATA.unitTargets[grade] = {};
+  const otherGrades = ['6','7','8'].filter(g=>g!==grade);
+
+  units.forEach((u, uIdx)=>{
+    const target = DATA.unitTargets[grade][u.id] || 0;
+    const lessons = lessonsForGrade(grade).filter(l=>l.unitId===u.id).sort((a,b)=>(a.order||0)-(b.order||0));
+    const pct = target>0 ? Math.min(100, Math.round(lessons.length/target*100)) : 0;
+    const posOptions = (count)=> Array.from({length:count}, (_,i)=>`<option value="${i+1}">${i+1}</option>`).join('');
+
+    const card = document.createElement('div');
+    card.className = 'unit-card';
+    card.innerHTML = `
+      <div class="unit-top">
+        <div class="unit-top-main">
+          <span class="unit-index">#${uIdx+1}</span>
+          <input class="unit-title-edit" value="${u.name}">
+          <div class="unit-progress-wrap">
+            <div class="unit-progress"><div class="unit-progress-fill" style="width:${pct}%"></div></div>
+            <span class="unit-count">${lessons.length}/<input class="unit-target" type="number" min="0" value="${target}">&nbsp;· ${pct}%</span>
+          </div>
+        </div>
+        <div class="unit-top-actions">
+          <select class="unit-pos-select" title="Move this unit to a different position"><option value="">#${uIdx+1}</option>${posOptions(units.length)}</select>
+          <select class="unit-copy-select" title="Copy this unit to another grade">
+            <option value="">⧉</option>
+            ${otherGrades.map(g=>`<option value="${g}">${g}th grade</option>`).join('')}
+          </select>
+          <button class="unit-del-btn" title="Delete unit">🗑</button>
+        </div>
+      </div>
+      <div class="unit-body">
+        ${lessons.length===0 ? '<div class="unit-lesson-empty">No lessons in this unit yet — add one below.</div>' :
+          lessons.map((l,idx)=>`
+            <div class="unit-lesson-row" data-id="${l.id}">
+              <div class="ulr-main">
+                <span class="ulr-index">${idx+1}.</span>
+                <span class="ulr-title">${l.title || '(untitled)'}</span>
+                <span class="ulr-badge muted">${lessonScheduleSummary(l.id).text}</span>
+              </div>
+              <div class="ulr-actions">
+                <select class="lesson-pos-select" data-id="${l.id}" title="Move this lesson to a different position"><option value="">#${idx+1}</option>${posOptions(lessons.length)}</select>
+                <select class="lesson-move-select" data-id="${l.id}" title="Move this lesson to a different unit">
+                  <option value="">📂</option>
+                  ${units.filter(ou=>ou.id!==u.id).map(ou=>`<option value="${ou.id}">${ou.name}</option>`).join('')}
+                </select>
+                <select class="lesson-copy-select" data-id="${l.id}" title="Copy this lesson to another grade">
+                  <option value="">⧉</option>
+                  ${otherGrades.map(g=>`<optgroup label="${g}th grade">${DATA.units[g].map(tu=>`<option value="${g}::${tu.id}">${tu.name}</option>`).join('')}</optgroup>`).join('')}
+                </select>
+                <span class="ulr-dur-label" title="Duration in days">🕐<input class="dur-input" type="number" min="1" value="${l.duration||1}" data-id="${l.id}"></span>
+                <button class="ulr-del" data-id="${l.id}" title="Delete lesson">✕</button>
+              </div>
+            </div>
+          `).join('')
+        }
+      </div>
+    `;
+    card.querySelector('.unit-top').addEventListener('click', e=>{
+      if(['INPUT','SELECT','BUTTON','LABEL'].includes(e.target.tagName)) return;
+      card.classList.toggle('open');
+    });
+    const titleInput = card.querySelector('.unit-title-edit');
+    titleInput.addEventListener('click', e=>e.stopPropagation());
+    titleInput.addEventListener('change', e=>{ u.name = e.target.value; saveData(); });
+
+    const targetInput = card.querySelector('.unit-target');
+    targetInput.addEventListener('click', e=>e.stopPropagation());
+    targetInput.addEventListener('change', e=>{ DATA.unitTargets[grade][u.id] = Number(e.target.value)||0; saveData(); renderUnits(grade); });
+
+    const copySel = card.querySelector('.unit-copy-select');
+    copySel.addEventListener('click', e=>e.stopPropagation());
+    copySel.addEventListener('change', e=>{ const tg=e.target.value; if(tg) copyUnitToGrade(grade, u.id, tg); e.target.value=''; });
+
+    card.querySelector('.unit-del-btn').addEventListener('click', e=>{ e.stopPropagation(); deleteUnit(grade, u.id); });
+
+    const unitPosSel = card.querySelector('.unit-pos-select');
+    unitPosSel.addEventListener('click', e=>e.stopPropagation());
+    unitPosSel.addEventListener('change', e=>{
+      const newPos = Number(e.target.value); if(!newPos) return;
+      moveUnitToPosition(grade, u.id, newPos);
+    });
+
+    card.querySelectorAll('.ulr-title').forEach(el=>{
+      el.addEventListener('click', ()=> openLessonModal(el.closest('.unit-lesson-row').dataset.id));
+    });
+    card.querySelectorAll('.dur-input').forEach(inp=>{
+      inp.addEventListener('click', e=>e.stopPropagation());
+      inp.addEventListener('change', e=>{
+        const lesson = DATA.lessons.find(x=>x.id===e.target.dataset.id);
+        if(lesson){ lesson.duration = Math.max(1, Number(e.target.value)||1); saveData(); }
+      });
+    });
+    card.querySelectorAll('.lesson-pos-select').forEach(sel=>{
+      sel.addEventListener('click', e=>e.stopPropagation());
+      sel.addEventListener('change', e=>{
+        const newPos = Number(e.target.value); if(!newPos) return;
+        moveLessonToPosition(grade, u.id, e.target.dataset.id, newPos);
+      });
+    });
+    card.querySelectorAll('.lesson-move-select').forEach(sel=>{
+      sel.addEventListener('click', e=>e.stopPropagation());
+      sel.addEventListener('change', e=>{
+        const targetUnitId = e.target.value; if(!targetUnitId) return;
+        moveLessonToUnit(e.target.dataset.id, grade, targetUnitId);
+        e.target.value = '';
+      });
+    });
+    card.querySelectorAll('.lesson-copy-select').forEach(sel=>{
+      sel.addEventListener('click', e=>e.stopPropagation());
+      sel.addEventListener('change', e=>{
+        const val = e.target.value; if(!val) return;
+        const [targetGrade, targetUnitId] = val.split('::');
+        copyLessonToGrade(e.target.dataset.id, targetGrade, targetUnitId);
+        e.target.value = '';
+      });
+    });
+    card.querySelectorAll('.ulr-del').forEach(btn=>{
+      btn.addEventListener('click', e=>{
+        e.stopPropagation();
+        const id = e.target.dataset.id;
+        const lesson = DATA.lessons.find(x=>x.id===id);
+        showConfirm({
+          title:'Delete this lesson?',
+          message:`"${lesson ? lesson.title || '(untitled)' : ''}" will be permanently removed from Units, Week, and Library.`,
+          okLabel:'Delete lesson',
+          onOk:()=>{ DATA.lessons = DATA.lessons.filter(x=>x.id!==id); saveData(); renderGrade(grade); showToast('Lesson deleted'); }
+        });
+      });
+    });
+
+    const addLessonBtn = document.createElement('button');
+    addLessonBtn.className = 'add-lesson-inline';
+    addLessonBtn.textContent = '+ Add lesson to this unit';
+    addLessonBtn.addEventListener('click', e=>{ e.stopPropagation(); openLessonModal(null, null, u.id, grade); card.classList.add('open'); });
+    card.querySelector('.unit-body').appendChild(addLessonBtn);
+
+    wrap.appendChild(card);
+  });
+
+  const addBtn = document.createElement('button');
+  addBtn.className = 'add-unit-btn';
+  addBtn.textContent = '+ Add unit';
+  addBtn.onclick = ()=> addUnit(grade);
+  wrap.appendChild(addBtn);
+}
+function addUnit(grade){
+  const newUnit = {id: uid('u'), name:'New unit'};
+  DATA.units[grade].push(newUnit);
+  if(!DATA.unitTargets[grade]) DATA.unitTargets[grade] = {};
+  DATA.unitTargets[grade][newUnit.id] = 0;
+  saveData(); renderUnits(grade);
+  showToast('Unit added — rename it whenever you like ✓');
+}
+function moveUnitToPosition(grade, unitId, newPos){
+  const arr = DATA.units[grade];
+  const idx = arr.findIndex(u=>u.id===unitId);
+  if(idx<0) return;
+  const [item] = arr.splice(idx,1);
+  const clamped = Math.max(0, Math.min(arr.length, newPos-1));
+  arr.splice(clamped, 0, item);
+  saveData(); renderUnits(grade);
+}
+function moveLessonToPosition(grade, unitId, lessonId, newPos){
+  const sorted = lessonsForGrade(grade).filter(l=>l.unitId===unitId).sort((a,b)=>(a.order||0)-(b.order||0));
+  const idx = sorted.findIndex(l=>l.id===lessonId);
+  if(idx<0) return;
+  const [item] = sorted.splice(idx,1);
+  const clamped = Math.max(0, Math.min(sorted.length, newPos-1));
+  sorted.splice(clamped, 0, item);
+  sorted.forEach((l,i)=>{ l.order = i; });
+  saveData(); renderUnits(grade);
+}
+function deleteUnit(grade, unitId){
+  const hasLessons = lessonsForGrade(grade).some(l=>l.unitId===unitId);
+  if(hasLessons){
+    showConfirm({ title:'This unit still has lessons', message:'Delete or move the lessons inside this unit first, then you can delete the unit itself.', okLabel:'Got it', okOnly:true });
+    return;
+  }
+  const u = unitById(grade, unitId);
+  showConfirm({
+    title:'Delete this unit?', message:`"${u ? u.name : ''}" will be permanently removed. This can't be undone.`, okLabel:'Delete unit',
+    onOk:()=>{
+      DATA.units[grade] = DATA.units[grade].filter(x=>x.id!==unitId);
+      delete DATA.unitTargets[grade][unitId];
+      saveData(); renderUnits(grade);
+      showToast('Unit deleted');
+    }
+  });
+}
+function copyUnitToGrade(grade, unitId, targetGrade){
+  const u = unitById(grade, unitId);
+  const target = (DATA.unitTargets[grade]||{})[unitId] || 10;
+  showConfirm({
+    title:'Copy this unit?',
+    message:`Copy "${u.name}" and its lessons into ${targetGrade}th grade. You can rename it and add or remove lessons afterward — nothing in ${grade}th grade will change.`,
+    okLabel:'Copy unit',
+    onOk:()=>{
+      const newUnit = {id: uid('u'), name: u.name};
+      DATA.units[targetGrade].push(newUnit);
+      if(!DATA.unitTargets[targetGrade]) DATA.unitTargets[targetGrade] = {};
+      DATA.unitTargets[targetGrade][newUnit.id] = target;
+      const sourceLessons = DATA.lessons.filter(l=>l.grade===grade && l.unitId===unitId);
+      sourceLessons.forEach(l=>{ DATA.lessons.push(Object.assign({}, l, { id: uid('l'), grade: targetGrade, unitId: newUnit.id, date: null })); });
+      saveData(); renderUnits(grade);
+      showToast(`Copied to ${targetGrade}th grade (unscheduled) — switch grades to edit it ✓`);
+    }
+  });
+}
+function moveLessonToUnit(lessonId, grade, targetUnitId){
+  const lesson = DATA.lessons.find(x=>x.id===lessonId);
+  if(!lesson) return;
+  const targetUnit = unitById(grade, targetUnitId);
+  const siblings = DATA.lessons.filter(l=>l.grade===grade && l.unitId===targetUnitId);
+  lesson.unitId = targetUnitId;
+  lesson.order = siblings.length ? Math.max(...siblings.map(l=>l.order||0)) + 1 : 0;
+  saveData(); renderUnits(grade);
+  showToast(`Moved to "${targetUnit ? targetUnit.name : ''}" ✓`);
+}
+function copyLessonToGrade(lessonId, targetGrade, targetUnitId){
+  const lesson = DATA.lessons.find(x=>x.id===lessonId);
+  if(!lesson) return;
+  const targetUnit = unitById(targetGrade, targetUnitId);
+  showConfirm({
+    title:'Copy this lesson?',
+    message:`Copy "${lesson.title || '(untitled)'}" into ${targetUnit ? targetUnit.name : ''} (${targetGrade}th grade). It will be unscheduled there — add it to the calendar whenever you're ready.`,
+    okLabel:'Copy lesson',
+    onOk:()=>{
+      DATA.lessons.push(Object.assign({}, lesson, { id: uid('l'), grade: targetGrade, unitId: targetUnitId, date: null }));
+      saveData(); renderUnits(lesson.grade);
+      showToast(`Copied into ${targetGrade}th grade ✓`);
+    }
+  });
+}
+
+// ─── GRADE VIEWS: STANDARDS ───────────────────────────────────────────────────
+function stdList(grade){ if(!DATA.standards[grade]) DATA.standards[grade] = []; return DATA.standards[grade]; }
+function renderStandards(grade){
+  const wrap = document.getElementById('stdList-'+grade);
+  wrap.innerHTML = '';
+  const list = stdList(grade);
+  const tops = list.filter(s=>!s.parent);
+  if(tops.length===0){ wrap.innerHTML = `<div style="color:var(--text-muted);font-size:13px;">Add your CTAE standard codes above to track coverage for grade ${grade}.</div>`; }
+  tops.forEach(s=>{
+    const count = DATA.lessons.filter(l=>l.grade===grade && (l.standards||[]).includes(s.code)).length;
+    const subs = list.filter(x=>x.parent===s.code);
+    const card = document.createElement('div');
+    card.className = 'std-card';
+    card.innerHTML = `
+      <div class="std-row">
+        <span class="std-code">${s.code}</span>
+        <span class="std-desc"><input value="${s.desc||''}"></span>
+        <span class="std-count">${count} lesson${count===1?'':'s'}</span>
+        <button class="std-del">✕</button>
+      </div>
+      <div class="sub-list">
+        ${subs.map(sub=>{
+          const subCount = DATA.lessons.filter(l=>l.grade===grade && (l.standards||[]).includes(sub.code)).length;
+          return `<div class="sub-row" data-code="${sub.code}">
+            <span class="std-code">${sub.code}</span>
+            <span class="std-desc"><input value="${sub.desc||''}"></span>
+            <span class="std-count">${subCount} lesson${subCount===1?'':'s'}</span>
+            <button class="std-del">✕</button>
+          </div>`;
+        }).join('')}
+        <button class="add-sub-btn" type="button">+ Add sub-standard</button>
+        <div class="add-sub-form">
+          <input type="text" class="sub-code-new" placeholder="Sub-code (e.g. ${s.code}.1)">
+          <input type="text" class="sub-desc-new" placeholder="Short description">
+          <button type="button" class="sub-add-confirm">Add</button>
+        </div>
+      </div>
+    `;
+    card.querySelector('.std-desc input').addEventListener('change', e=>{ const std = list.find(x=>x.code===s.code); std.desc = e.target.value; saveData(); });
+    card.querySelector('.std-row .std-del').addEventListener('click', ()=>{
+      showConfirm({
+        title:'Delete this standard?',
+        message: subs.length ? `"${s.code}" has ${subs.length} sub-standard(s) that will be deleted too.` : `"${s.code}" will be removed from your tracker.`,
+        okLabel:'Delete',
+        onOk:()=>{ DATA.standards[grade] = list.filter(x=>x.code!==s.code && x.parent!==s.code); saveData(); renderStandards(grade); }
+      });
+    });
+    card.querySelectorAll('.sub-row').forEach(row=>{
+      const code = row.dataset.code;
+      row.querySelector('input').addEventListener('change', e=>{ const std = list.find(x=>x.code===code); std.desc = e.target.value; saveData(); });
+      row.querySelector('.std-del').addEventListener('click', ()=>{
+        showConfirm({ title:'Delete this sub-standard?', message:`"${code}" will be removed from your tracker.`, okLabel:'Delete',
+          onOk:()=>{ DATA.standards[grade] = list.filter(x=>x.code!==code); saveData(); renderStandards(grade); } });
+      });
+    });
+    const addSubBtn = card.querySelector('.add-sub-btn');
+    const addSubForm = card.querySelector('.add-sub-form');
+    addSubBtn.addEventListener('click', ()=> addSubForm.classList.toggle('open'));
+    card.querySelector('.sub-add-confirm').addEventListener('click', ()=>{
+      const code = card.querySelector('.sub-code-new').value.trim();
+      const desc = card.querySelector('.sub-desc-new').value.trim();
+      if(!code) return;
+      list.push({code, desc, parent:s.code});
+      saveData(); renderStandards(grade);
+    });
+    wrap.appendChild(card);
+  });
+}
+function addStandard(grade){
+  const code = document.getElementById('stdCodeNew-'+grade).value.trim();
+  const desc = document.getElementById('stdDescNew-'+grade).value.trim();
+  if(!code) return;
+  stdList(grade).push({code, desc, parent:null});
+  document.getElementById('stdCodeNew-'+grade).value=''; document.getElementById('stdDescNew-'+grade).value='';
+  saveData(); renderStandards(grade);
+}
+
+// ─── LIBRARY ──────────────────────────────────────────────────────────────────
+function lessonScheduleSummary(lessonId){
+  const hits = [];
+  DATA.periods.forEach(p=>{
+    const sched = scheduleForPeriod(p.id);
+    Object.keys(sched).forEach(dk=>{ if(sched[dk]===lessonId) hits.push({dk, period:p}); });
+  });
+  if(!hits.length) return { text:'Not scheduled', sortKey:'' };
+  hits.sort((a,b)=>a.dk.localeCompare(b.dk));
+  const text = hits.map(h=>`${formatDateShort(h.dk)} (${h.period.name})`).join(', ');
+  return { text, sortKey: hits[0].dk };
+}
+function refreshLibraryFilters(){
+  const gradeFilter = document.getElementById('libGradeFilter').value;
+  const sel = document.getElementById('libUnitFilter');
+  const prev = sel.value;
+  let options = '<option value="">All units</option>';
+  const grades = gradeFilter ? [gradeFilter] : ['6','7','8'];
+  grades.forEach(g=>{ DATA.units[g].forEach(u=>{ options += `<option value="${g}::${u.id}">${gradeFilter ? '' : g+'th – '}${u.name}</option>`; }); });
+  sel.innerHTML = options;
+  if([...sel.options].some(o=>o.value===prev)) sel.value = prev;
+}
+function renderLibrary(){
+  refreshLibraryFilters();
+  const q = document.getElementById('libSearch').value.trim().toLowerCase();
+  const gradeFilter = document.getElementById('libGradeFilter').value;
+  const unitFilter = document.getElementById('libUnitFilter').value;
+  let list = DATA.lessons.slice();
+  if(gradeFilter) list = list.filter(l=>l.grade===gradeFilter);
+  if(unitFilter){ const [ug, uid_] = unitFilter.split('::'); list = list.filter(l=>l.grade===ug && l.unitId===uid_); }
+  if(q){
+    list = list.filter(l=>
+      (l.title||'').toLowerCase().includes(q) || (l.standards||[]).some(s=>s.toLowerCase().includes(q)) ||
+      (l.objectives||'').toLowerCase().includes(q) || (l.notes||'').toLowerCase().includes(q) || (l.vocab||'').toLowerCase().includes(q)
+    );
+  }
+  const withSchedule = list.map(l=>({ l, sched: lessonScheduleSummary(l.id) }));
+  withSchedule.sort((a,b)=> (b.sched.sortKey||'').localeCompare(a.sched.sortKey||''));
+  const body = document.getElementById('libBody');
+  body.innerHTML = withSchedule.length ? '' : `<tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:24px;">No results yet.</td></tr>`;
+  withSchedule.forEach(({l, sched})=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><b>${l.title || '(untitled)'}</b></td>
+      <td>${l.grade}th</td>
+      <td>${unitName(l.grade, l.unitId)}</td>
+      <td style="font-size:11px;">${sched.text}</td>
+      <td>${(l.standards||[]).map(s=>`<span class="chip-mini">${s}</span>`).join(' ')}</td>
+      <td style="max-width:180px;color:var(--text-muted);font-size:11.5px;">${(l.notes||'').slice(0,60)}</td>
+    `;
+    tr.addEventListener('click', ()=> openLessonModal(l.id, null, null, l.grade));
+    body.appendChild(tr);
+  });
+}
+['libSearch','libGradeFilter','libUnitFilter'].forEach(id=> document.getElementById(id).addEventListener('input', renderLibrary));
+
+// ─── LESSON EDITOR MODAL ──────────────────────────────────────────────────────
+const lessonOverlay = document.getElementById('lesson-modal-overlay');
+const FIELD_IDS = ['title','duration','objectives','successcriteria','priorknowledge','essentialq','vocab','materials','bellringer','minilesson','quickcheck','modeling','guided','independent','exit','homework','ell','sped','fast','notes'];
+
+function openLessonModal(lessonId, prefillDate, prefillUnitId, gradeOverride){
+  ui.editingLessonId = lessonId;
+  ui.modalGrade = gradeOverride || ui.modalGrade || '6';
+  if(lessonId){ const found = DATA.lessons.find(x=>x.id===lessonId); if(found) ui.modalGrade = found.grade; }
+  const grade = ui.modalGrade;
+
+  const unitSel = document.getElementById('f_unit');
+  unitSel.innerHTML = DATA.units[grade].map(u=>`<option value="${u.id}">${u.name}</option>`).join('');
+
+  let l = { title:'', unitId: prefillUnitId || (DATA.units[grade][0] && DATA.units[grade][0].id), date: prefillDate || null, duration:1,
+    standards:[], objectives:'', successcriteria:'', priorknowledge:'', essentialq:'', vocab:'', materials:'', bellringer:'', minilesson:'', quickcheck:'', modeling:'', guided:'', independent:'', exit:'', homework:'', ell:'', sped:'', fast:'', notes:'', files:[] };
+  if(lessonId){ const found = DATA.lessons.find(x=>x.id===lessonId); if(found) l = Object.assign({}, l, found); }
+
+  document.getElementById('lessonModalTitle').textContent = (lessonId ? 'Edit lesson' : 'New lesson') + ` · Grade ${grade}`;
+  document.getElementById('f_title').value = l.title;
+  unitSel.value = l.unitId;
+  document.getElementById('f_duration').value = l.duration || 1;
+  FIELD_IDS.forEach(fid=>{ if(['title','duration'].includes(fid)) return; const el = document.getElementById('f_'+fid); if(el) el.value = l[fid] || ''; });
+
+  ui.currentTags = (l.standards||[]).slice();
+  renderStdSelect();
+  renderTags();
+  ui.currentFiles = (l.files||[]).slice();
+  renderFiles();
+
+  document.getElementById('lessonDeleteBtn').style.display = lessonId ? 'inline-block' : 'none';
+  lessonOverlay.classList.add('open');
+}
+function closeLessonModal(){ lessonOverlay.classList.remove('open'); ui.editingLessonId=null; }
+function closeLessonModalOnBg(e){ if (e.target === lessonOverlay) closeLessonModal(); }
+
+function renderStdSelect(){
+  const sel = document.getElementById('f_stdSelect');
+  const flat = (DATA.standards[ui.modalGrade]||[]);
+  sel.innerHTML = '<option value="">+ choose a standard...</option>' + flat.map(s=>{
+    const label = s.parent ? `— ${s.code}` : s.code;
+    return `<option value="${s.code}">${label}${s.desc ? ' — '+s.desc : ''}</option>`;
+  }).join('');
+  sel.onchange = ()=>{ if(sel.value && !ui.currentTags.includes(sel.value)){ ui.currentTags.push(sel.value); renderTags(); } sel.value = ''; };
+}
+function renderTags(){
+  const box = document.getElementById('stdTagBox');
+  box.querySelectorAll('.tagchip').forEach(c=>c.remove());
+  ui.currentTags.forEach((t,i)=>{
+    const chip = document.createElement('span');
+    chip.className='tagchip';
+    chip.innerHTML = `${t}<button type="button">✕</button>`;
+    chip.querySelector('button').onclick = ()=>{ ui.currentTags.splice(i,1); renderTags(); };
+    box.insertBefore(chip, document.getElementById('f_stdSelect'));
+  });
+}
+function renderFiles(){
+  const wrap = document.getElementById('resList');
+  wrap.innerHTML = '';
+  ui.currentFiles.forEach((r,i)=>{
+    const row = document.createElement('div');
+    row.className='res-item';
+    const isUrl = /^https?:\/\//i.test(r.trim());
+    row.innerHTML = `<input value="${r}" placeholder="Paste a Google Drive / web link here"><button type="button" class="res-open" ${isUrl?'':'disabled'} title="${isUrl?'Open this link':'Paste a link starting with http(s):// to enable'}">↗</button><button type="button" class="res-del">✕</button>`;
+    row.querySelector('input').addEventListener('input', e=>{
+      ui.currentFiles[i]=e.target.value;
+      const openBtn = row.querySelector('.res-open');
+      const nowUrl = /^https?:\/\//i.test(e.target.value.trim());
+      openBtn.disabled = !nowUrl;
+      openBtn.title = nowUrl ? 'Open this link' : 'Paste a link starting with http(s):// to enable';
+    });
+    row.querySelector('.res-open').addEventListener('click', ()=>{ const val = ui.currentFiles[i].trim(); if(/^https?:\/\//i.test(val)) window.open(val, '_blank', 'noopener'); });
+    row.querySelector('.res-del').addEventListener('click', ()=>{ ui.currentFiles.splice(i,1); renderFiles(); });
+    wrap.appendChild(row);
+  });
+}
+document.getElementById('addResBtn').onclick = ()=>{ ui.currentFiles.push(''); renderFiles(); };
+
+document.getElementById('lessonSaveBtn').onclick = ()=>{
+  const grade = ui.modalGrade;
+  const unitIdSel = document.getElementById('f_unit').value;
+  let order = 0;
+  let existingDate = null;
+  if(ui.editingLessonId){
+    const existing = DATA.lessons.find(x=>x.id===ui.editingLessonId);
+    order = existing && typeof existing.order==='number' ? existing.order : 0;
+    existingDate = existing ? existing.date : null;
+  } else {
+    const siblings = DATA.lessons.filter(l=>l.grade===grade && l.unitId===unitIdSel);
+    order = siblings.length ? Math.max(...siblings.map(l=>l.order||0)) + 1 : 0;
+  }
+  const data = { id: ui.editingLessonId || uid('l'), grade, order,
+    title: document.getElementById('f_title').value.trim(),
+    unitId: unitIdSel,
+    duration: Math.max(1, Number(document.getElementById('f_duration').value)||1),
+    date: existingDate,
+    standards: ui.currentTags.slice(),
+    files: ui.currentFiles.filter(r=>r.trim()!=='') };
+  FIELD_IDS.forEach(fid=>{ if(['title','duration'].includes(fid)) return; const el = document.getElementById('f_'+fid); if(el) data[fid] = el.value; });
+  if(ui.editingLessonId){ const idx = DATA.lessons.findIndex(x=>x.id===ui.editingLessonId); DATA.lessons[idx] = data; }
+  else { DATA.lessons.push(data); }
+  saveData(); closeLessonModal();
+  if(ui.view==='grade'+grade) renderGrade(grade);
+  if(ui.view==='weekly') renderWeekly();
+  if(ui.view==='library') renderLibrary();
+  showToast('Lesson saved ✓');
+};
+document.getElementById('lessonDeleteBtn').onclick = ()=>{
+  if(!ui.editingLessonId) return;
+  const grade = ui.modalGrade;
+  showConfirm({
+    title:'Delete this lesson?', message:'This will permanently remove it from Units, Week, and Library.', okLabel:'Delete lesson',
+    onOk:()=>{
+      DATA.lessons = DATA.lessons.filter(x=>x.id!==ui.editingLessonId);
+      saveData(); closeLessonModal();
+      if(ui.view==='grade'+grade) renderGrade(grade);
+      if(ui.view==='weekly') renderWeekly();
+      if(ui.view==='library') renderLibrary();
+      showToast('Lesson deleted');
+    }
+  });
+};
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+// ─── BACKUP: EXPORT / IMPORT / RESET ─────────────────────────────────────────
+document.getElementById('exportBtn').onclick = ()=>{
+  const blob = new Blob([JSON.stringify(DATA,null,2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `mrs-moroni-planner-backup-${todayStr()}.json`; a.click();
+  URL.revokeObjectURL(url);
+  showToast('Backup downloaded ✓');
+};
+document.getElementById('importBtn').onclick = ()=> document.getElementById('fileImport').click();
+document.getElementById('fileImport').addEventListener('change', e=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    try{
+      const parsed = JSON.parse(reader.result);
+      if(!parsed.lessons || !parsed.units) throw new Error('invalid format');
+      showConfirm({
+        title:'Import this backup?', message:'This will replace everything currently in the planner with the contents of this file.', okLabel:'Import',
+        onOk:()=>{ DATA = parsed; saveData(); showView(ui.view); showToast('Backup imported ✓'); }
+      });
+    }catch(err){
+      showConfirm({ title:'Could not read file', message:"That file doesn't look like a valid Mrs. Moroni Planner backup.", okLabel:'OK', okOnly:true });
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+});
+document.getElementById('resetBtn').onclick = ()=>{
+  showConfirm({
+    title:'Reset ALL data?',
+    message:'This permanently deletes every lesson, unit, standard, event, and note — in this browser and in Claude\u2019s storage — and starts over from scratch. Export a backup first if you want to keep anything!',
+    okLabel:'Reset everything',
+    onOk: async ()=>{
+      try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+      if(hasClaudeStorage){ try{ await window.storage.delete(STORAGE_KEY, false); }catch(e){} }
+      DATA = null;
+      await boot();
+      showToast('Everything reset ✓');
+    }
+  });
+};
+
+// ─── PRINT ───────────────────────────────────────────────────────────────────
+function printContent(html){
+  const root = document.getElementById('print-root');
+  root.innerHTML = `<div class="print-block">${html}</div>`;
+  document.body.classList.add('printing');
+  window.print();
+  setTimeout(()=>{ document.body.classList.remove('printing'); root.innerHTML=''; }, 300);
+}
+function esc(s){ return (s||'').toString().replace(/</g,'&lt;'); }
+function printWeek(){
+  const weekStart = getWeekStart(ui.currentDateStr);
+  const days = [];
+  for (let i = 0; i < 5; i++) {
+    const d = new Date(weekStart); d.setDate(d.getDate()+i);
+    days.push({ d, dk: dateKey(d.getFullYear(), d.getMonth()+1, d.getDate()) });
+  }
+  let html = `<h1>Weekly Agenda</h1><div class="print-sub">${MONTH_NAMES[weekStart.getMonth()]} ${weekStart.getDate()} – ${days[4].d.getDate()}, ${days[4].d.getFullYear()}</div>`;
+  html += `<table><thead><tr><th>Period</th>${days.map(({d})=>`<th>${DAY_NAMES[d.getDay()].slice(0,3)} ${d.getDate()}</th>`).join('')}</tr></thead><tbody>`;
+  const evRow = days.map(({dk})=> (DATA.events[dk]||[]).map(e=>esc(e.title)).join('<br>') || '—').map(c=>`<td>${c}</td>`).join('');
+  html += `<tr><td><b>Events</b></td>${evRow}</tr>`;
+  DATA.periods.forEach(p=>{
+    const cells = days.map(({dk})=>{
+      const entries = lessonsOnDateForPeriod(p.id, dk).filter(e=>!e.isGhost);
+      if(!entries.length) return '<td>—</td>';
+      return `<td>${entries.map(e=>esc(e.lesson.title)).join('<br>')}</td>`;
+    }).join('');
+    html += `<tr><td><b>${esc(p.name)}</b>${p.time?`<br><span style="font-size:10px;color:#666">${esc(p.time)}</span>`:''}</td>${cells}</tr>`;
+  });
+  const noteRow = days.map(({dk})=>{
+    ensureDayData(dk);
+    const items = DATA.dayData[dk].notes||[];
+    return `<td>${items.map(n=>esc(n.text)).join('<br>') || '—'}</td>`;
+  }).join('');
+  html += `<tr><td><b>Notes</b></td>${noteRow}</tr>`;
+  html += `</tbody></table>`;
+  printContent(html);
+}
+function printTasks(){
+  const pending = DATA.tasks.filter(t=>!t.done);
+  const done = DATA.tasks.filter(t=>t.done).sort((a,b)=>(b.completedDate||'').localeCompare(a.completedDate||''));
+  let html = `<h1>Pending Tasks</h1><div class="print-sub">Printed ${new Date().toLocaleDateString('en-US')}</div>`;
+  html += `<h2>Pending (${pending.length})</h2><table><thead><tr><th>Task</th><th>Due</th></tr></thead><tbody>`;
+  html += pending.length ? pending.map(t=>`<tr><td>${esc(t.text)}</td><td>${t.dueDate?formatDateShort(t.dueDate):'—'}</td></tr>`).join('') : '<tr><td colspan="2">Nothing pending ✓</td></tr>';
+  html += `</tbody></table>`;
+  if(done.length){
+    html += `<h2>Completed (${done.length})</h2><table><thead><tr><th>Task</th><th>Completed on</th></tr></thead><tbody>`;
+    html += done.map(t=>`<tr><td>${esc(t.text)}</td><td>${t.completedDate?formatDateShort(t.completedDate):'—'}</td></tr>`).join('');
+    html += `</tbody></table>`;
+  }
+  printContent(html);
+}
+function printLesson(){
+  if(!ui.editingLessonId){ showToast('Save the lesson first, then print it.'); return; }
+  const l = DATA.lessons.find(x=>x.id===ui.editingLessonId);
+  if(!l) return;
+  const grade = ui.modalGrade;
+  const fields = [
+    ['Unit', unitName(grade, l.unitId)], ['Duration', (l.duration||1)+' day(s)'], ['Standards', (l.standards||[]).join(', ')||'—'],
+    ['Learning Target', l.objectives], ['Success Criteria', l.successcriteria], ['Prior Knowledge', l.priorknowledge], ['Powerful Questions', l.essentialq], ['Vocabulary', l.vocab],
+    ['Warm Up', l.bellringer], ['Mini Lesson', l.minilesson], ['Quick Check-ins', l.quickcheck],
+    ['I — Modeling', l.modeling], ['We — Guided Practice', l.guided], ['You — Independent Practice', l.independent],
+    ['Exit Ticket', l.exit], ['Homework', l.homework],
+    ['ELL', l.ell], ['SPED', l.sped], ['Fast Finishers', l.fast],
+    ['Materials', l.materials], ['Files / Links', (l.files||[]).join(', ')], ['Notes', l.notes],
+  ];
+  let html = `<h1>${esc(l.title||'(untitled)')}</h1><div class="print-sub">Grade ${grade} · ${esc(unitName(grade,l.unitId))}</div>`;
+  fields.forEach(([label,val])=>{ if(val) html += `<div class="print-field"><b>${label}</b>${esc(val)}</div>`; });
+  printContent(html);
+}
+
+async function boot() {
+  const t = new Date();
+  let initDate = t;
+  const inRange = (t >= new Date('2026-07-01') && t <= new Date('2027-06-30'));
+  if (!inRange) initDate = new Date('2026-08-04T12:00:00');
+  ui.currentDateStr = dateKey(initDate.getFullYear(), initDate.getMonth()+1, initDate.getDate());
+  ui.currentYear = initDate.getFullYear();
+  ui.currentMonth = initDate.getMonth()+1;
+
+  DATA = await loadData();
+  showView('dashboard');
+}
+boot();
+</script>
+<div id="print-root"></div>
+
+</body>
+</html>
