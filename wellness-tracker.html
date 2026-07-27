@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Wellness Routine</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --blush: #E8C4B8;
+    --rose: #C97B6A;
+    --deep: #2A1F1A;
+    --warm: #F7EDE8;
+    --sage: #8FA68A;
+    --sage-light: #D6E4D3;
+    --gold: #C9A96E;
+    --gold-light: #F5EDD9;
+    --muted: #9B8480;
+    --white: #FDFAF8;
+    --card: #FFFFFF;
+    --checked-bg: #F0EBE9;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm);
+    min-height: 100vh;
+    color: var(--deep);
+  }
+
+  header {
+    background: var(--deep);
+    padding: 28px 24px 22px;
+    text-align: center;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--blush);
+    letter-spacing: 0.02em;
+  }
+  header p {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .date-bar {
+    background: var(--rose);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .date-bar label {
+    font-size: 0.75rem;
+    color: var(--white);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .date-bar input[type="date"] {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 8px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    padding: 5px 10px;
+    cursor: pointer;
+    outline: none;
+  }
+  .date-bar input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
+
+  .reset-btn {
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 8px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 5px 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .reset-btn:hover { background: rgba(255,255,255,0.3); }
+
+  .backup-bar {
+    background: #1E1510;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .backup-bar span {
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-right: 4px;
+  }
+  .bk-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 8px;
+    color: var(--blush);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .bk-btn:hover { background: rgba(255,255,255,0.16); }
+  #importFile { display: none; }
+
+  .tabs {
+    display: flex;
+    background: var(--deep);
+    padding: 0 16px;
+    gap: 4px;
+  }
+  .tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 12px 8px 10px;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .tab-btn.active { color: var(--blush); border-bottom-color: var(--rose); }
+
+  .tab-content { display: none; padding: 16px; }
+  .tab-content.active { display: block; }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 18px 0 10px;
+  }
+  .section-label span {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rose);
+    white-space: nowrap;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--blush);
+    opacity: 0.5;
+  }
+  .section-first { margin-top: 6px; }
+
+  .item-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 1px 4px rgba(42,31,26,0.06);
+    transition: all 0.2s;
+  }
+  .item-card.checked { background: var(--checked-bg); opacity: 0.7; }
+  .item-card.checked .item-name { text-decoration: line-through; color: var(--muted); }
+
+  .custom-check {
+    width: 22px; height: 22px; min-width: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--blush);
+    background: transparent;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    font-size: 12px;
+    color: transparent;
+    user-select: none;
+  }
+  .item-card.checked .custom-check { background: var(--rose); border-color: var(--rose); color: white; }
+
+  .item-info { flex: 1; min-width: 0; }
+  .item-name { font-size: 0.9rem; font-weight: 500; color: var(--deep); }
+  .item-note { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+  .time-badge {
+    font-size: 0.66rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 20px; white-space: nowrap;
+  }
+  .badge-morning   { background: #FEF3E2; color: #B87A2A; }
+  .badge-midday    { background: #E8F4F0; color: #2D7A5E; }
+  .badge-afternoon { background: #EDE8F5; color: #6B52A8; }
+  .badge-evening   { background: var(--gold-light); color: #8A6A2A; }
+  .badge-night     { background: #E8EAF5; color: #3A4580; }
+
+  .freq-badge {
+    font-size: 0.66rem; font-weight: 600;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 3px 9px; border-radius: 20px; white-space: nowrap;
+  }
+  .freq-daily    { background: #FEF3E2; color: #B87A2A; }
+  .freq-2xweek  { background: #E8F4F0; color: #2D7A5E; }
+  .freq-weekly   { background: #EDE8F5; color: #6B52A8; }
+  .freq-2weeks   { background: var(--gold-light); color: #8A6A2A; }
+  .freq-monthly  { background: #E8EAF5; color: #3A4580; }
+  .freq-asneeded { background: var(--sage-light); color: #3A6035; }
+
+  /* Delete button — shown on hover/tap */
+  .delete-btn {
+    background: none;
+    border: 1.5px solid var(--blush);
+    border-radius: 8px;
+    color: var(--rose);
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 3px 7px;
+    opacity: 0.55;
+    transition: opacity 0.2s, background 0.2s;
+    white-space: nowrap;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .delete-btn:hover { opacity: 1; background: #fbeae6; }
+
+  .add-form {
+    background: var(--gold-light);
+    border-radius: 14px;
+    padding: 14px;
+    margin-top: 20px;
+  }
+  .add-form.sage-form { background: var(--sage-light); }
+  .add-form h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: var(--deep);
+    margin-bottom: 12px;
+  }
+  .form-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+  .form-row input, .form-row select {
+    flex: 1; min-width: 120px;
+    background: var(--white);
+    border: 1.5px solid var(--blush);
+    border-radius: 8px;
+    color: var(--deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    padding: 8px 10px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-row input:focus, .form-row select:focus { border-color: var(--rose); }
+  .add-submit {
+    width: 100%;
+    background: var(--rose);
+    border: none; border-radius: 10px;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem; font-weight: 600;
+    padding: 10px; cursor: pointer;
+    letter-spacing: 0.04em; margin-top: 4px;
+    transition: background 0.2s;
+  }
+  .add-submit:hover { background: var(--deep); }
+
+  .progress-wrap {
+    background: rgba(201,123,106,0.12);
+    border-radius: 20px; height: 6px;
+    margin: 6px 0 14px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--rose), var(--gold));
+    border-radius: 20px;
+    transition: width 0.4s ease;
+  }
+  .progress-text { font-size: 0.7rem; color: var(--muted); text-align: right; margin-bottom: 4px; }
+
+  /* History (vitamin / self-care lookup by date) */
+  .history-block {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 4px rgba(42,31,26,0.06);
+  }
+  .history-select {
+    width: 100%;
+    background: var(--white);
+    border: 1.5px solid var(--blush);
+    border-radius: 8px;
+    color: var(--deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    padding: 8px 10px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .history-select:focus { border-color: var(--rose); }
+  .tabs { flex-wrap: wrap; }
+  .tab-btn { flex: 1 1 auto; min-width: 130px; }
+
+  .history-count { font-size: 0.72rem; color: var(--muted); margin: 10px 0 6px; }
+  .history-dates { display: flex; flex-direction: column; gap: 6px; }
+  .history-chip {
+    display: block;
+    width: 100%;
+    background: var(--checked-bg);
+    color: var(--deep);
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 10px 14px;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(42,31,26,0.05);
+  }
+  .history-chip.sc { background: var(--sage-light); color: #3A6035; }
+  .history-empty { font-size: 0.78rem; color: var(--muted); font-style: italic; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>My Wellness Routine ✨</h1>
+  <p>vitamins · supplements · self care</p>
+</header>
+
+<div class="date-bar">
+  <label>📅 Fecha</label>
+  <input type="date" id="dateInput">
+  <button class="reset-btn" onclick="resetAll()">Reset día</button>
+</div>
+
+<div class="backup-bar">
+  <span>💾 Data</span>
+  <button class="bk-btn" onclick="exportBackup()">⬇ Export backup</button>
+  <button class="bk-btn" onclick="document.getElementById('importFile').click()">⬆ Import backup</button>
+  <input type="file" id="importFile" accept=".json" onchange="importBackup(event)">
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('vitamins',this)">💊 Vitamins</button>
+  <button class="tab-btn" onclick="switchTab('vit-history',this)">🗓 Hist. Vitaminas</button>
+  <button class="tab-btn" onclick="switchTab('selfcare',this)">🌿 Self Care</button>
+  <button class="tab-btn" onclick="switchTab('sc-history',this)">🗓 Hist. Self Care</button>
+</div>
+
+<!-- VITAMINS TAB -->
+<div id="tab-vitamins" class="tab-content active">
+  <div class="progress-text" id="vit-progress-text">0 / 0 completadas</div>
+  <div class="progress-wrap"><div class="progress-fill" id="vit-progress-fill" style="width:0%"></div></div>
+  <div id="vitamins-list"></div>
+
+  <div class="add-form">
+    <h3>+ Add a supplement</h3>
+    <div class="form-row">
+      <input type="text" id="new-vit-name" placeholder="Name (e.g. Vitamin C)">
+    </div>
+    <div class="form-row">
+      <select id="new-vit-time">
+        <option value="">When to take it</option>
+        <option value="morning">☀️ Morning (with breakfast)</option>
+        <option value="midday">🌤 Midday (with lunch)</option>
+        <option value="afternoon">🌥 Afternoon (3–5pm)</option>
+        <option value="evening">🌇 Evening (with dinner)</option>
+        <option value="night">🌙 Night (before bed)</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <input type="text" id="new-vit-note" placeholder="Notes (optional)">
+    </div>
+    <button class="add-submit" onclick="addVitamin()">Add Supplement</button>
+  </div>
+</div>
+
+<!-- VITAMIN HISTORY TAB -->
+<div id="tab-vit-history" class="tab-content">
+  <div class="section-label section-first"><span>🗓 Historial de Vitaminas</span></div>
+  <div class="history-block">
+    <select id="vit-history-select" class="history-select" onchange="renderVitHistory(this.value)"></select>
+    <div id="vit-history-result"></div>
+  </div>
+</div>
+
+<!-- SELFCARE TAB -->
+<div id="tab-selfcare" class="tab-content">
+  <div class="progress-text" id="sc-progress-text">0 / 0 completadas</div>
+  <div class="progress-wrap"><div class="progress-fill" id="sc-progress-fill" style="width:0%"></div></div>
+  <div id="selfcare-list"></div>
+
+  <div class="add-form sage-form">
+    <h3>+ Add a self care ritual</h3>
+    <div class="form-row">
+      <input type="text" id="new-sc-name" placeholder="Ritual name (e.g. Eye mask)">
+    </div>
+    <div class="form-row">
+      <select id="new-sc-freq">
+        <option value="">Frequency</option>
+        <option value="Daily">Daily</option>
+        <option value="2x week">2x / week</option>
+        <option value="Weekly">Weekly</option>
+        <option value="Every 2 weeks">Every 2 weeks</option>
+        <option value="Monthly">Monthly</option>
+        <option value="As needed">As needed</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <input type="text" id="new-sc-note" placeholder="Notes (optional)">
+    </div>
+    <button class="add-submit" onclick="addSelfcare()">Add Ritual</button>
+  </div>
+</div>
+
+<!-- SELFCARE HISTORY TAB -->
+<div id="tab-sc-history" class="tab-content">
+  <div class="section-label section-first"><span>🗓 Historial de Self Care</span></div>
+  <div class="history-block">
+    <select id="sc-history-select" class="history-select" onchange="renderSCHistory(this.value)"></select>
+    <div id="sc-history-result"></div>
+  </div>
+</div>
+
+<script>
+// ── Seed data ────────────────────────────────────────────────────────────────
+
+const SEED_VITAMINS = [
+  { id: 'levo',    name: 'Levotiroxina',              time: 'morning', note: '30–60 min before breakfast — take ALONE, no other supplements' },
+  { id: 'vitd',    name: 'Vitamin D3 + K2',            time: 'morning', note: 'With fatty food (D3 absorbs better with fat)' },
+  { id: 'omega',   name: 'Omega-3',                    time: 'morning', note: 'With breakfast — reduces fishy aftertaste' },
+  { id: 'seleno',  name: 'Selenio (Selenium)',          time: 'midday',  note: 'Supports thyroid — take with lunch, 4+ hrs after Levotiroxina' },
+  { id: 'zinc',    name: 'Zinc',                       time: 'midday',  note: 'With food to avoid nausea' },
+  { id: 'magnes',  name: 'Magnesio (Magnesium)',        time: 'night',   note: 'Best before bed — promotes relaxation & sleep' },
+  { id: 'pasif',   name: 'Pasiflora (Passionflower)',   time: 'night',   note: 'Take 30 min before bed — tea or capsule' },
+];
+
+const SEED_SELFCARE = [
+  { id: 'floss',      name: 'Flossing',          freq: 'Daily',          note: 'Every night before brushing' },
+  { id: 'hairmask',   name: 'Hair Mask',          freq: '2x week',        note: 'Leave 20–30 min, rinse cool' },
+  { id: 'selftan',    name: 'Self Tan',           freq: 'Weekly',         note: 'Exfoliate + moisturize first, apply w/ mitt' },
+  { id: 'manos',      name: 'Manicure / Hands',   freq: 'Weekly',         note: 'Cuticle oil, file, hydrating mask' },
+  { id: 'guasha',     name: 'Gua Sha',            freq: 'Every 2 weeks',  note: 'Clean skin, face oil, upward strokes' },
+  { id: 'pies',       name: 'Pedicure / Feet',    freq: 'Every 2 weeks',  note: 'Soak 10 min, pumice, thick cream + socks' },
+  { id: 'dermplan',   name: 'Dermaplanning',      freq: 'Monthly',        note: 'Dry clean skin, avoid active breakouts' },
+  { id: 'microneedl', name: 'Microneedling',      freq: 'Monthly',        note: 'Serum ready. Avoid retinol 3 days after' },
+];
+
+// ── Storage ───────────────────────────────────────────────────────────────────
+
+function todayStr() {
+  return document.getElementById('dateInput').value || new Date().toISOString().slice(0,10);
+}
+function loadState() {
+  try { return JSON.parse(localStorage.getItem('wellness_checks_' + todayStr())) || {}; } catch { return {}; }
+}
+function saveState(s) {
+  localStorage.setItem('wellness_checks_' + todayStr(), JSON.stringify(s));
+}
+// hidden = seed items the user deleted
+function loadHidden() {
+  try { return JSON.parse(localStorage.getItem('wellness_hidden')) || { v: [], s: [] }; } catch { return { v: [], s: [] }; }
+}
+function saveHidden(h) { localStorage.setItem('wellness_hidden', JSON.stringify(h)); }
+// custom = user-added items
+function loadCustom() {
+  try { return JSON.parse(localStorage.getItem('wellness_custom')) || { v: [], s: [] }; } catch { return { v: [], s: [] }; }
+}
+function saveCustom(c) { localStorage.setItem('wellness_custom', JSON.stringify(c)); }
+
+// ── Vitamins ──────────────────────────────────────────────────────────────────
+
+const TIME_ORDER  = ['morning','midday','afternoon','evening','night'];
+const TIME_ICONS  = { morning:'☀️ Morning', midday:'🌤 Midday', afternoon:'🌥 Afternoon', evening:'🌇 Evening', night:'🌙 Night' };
+const TIME_LABELS = { morning:'Morning', midday:'Midday', afternoon:'Afternoon', evening:'Evening', night:'Night' };
+const BADGE_CLS   = { morning:'badge-morning', midday:'badge-midday', afternoon:'badge-afternoon', evening:'badge-evening', night:'badge-night' };
+
+function renderVitamins() {
+  const state  = loadState();
+  const hidden = loadHidden();
+  const custom = loadCustom();
+  const allV   = [
+    ...SEED_VITAMINS.filter(v => !hidden.v.includes(v.id)),
+    ...custom.v
+  ];
+
+  const container = document.getElementById('vitamins-list');
+  container.innerHTML = '';
+
+  const grouped = {};
+  TIME_ORDER.forEach(t => grouped[t] = []);
+  allV.forEach(v => { if (grouped[v.time]) grouped[v.time].push(v); });
+
+  let first = true;
+  TIME_ORDER.forEach(time => {
+    if (!grouped[time].length) return;
+    const sec = document.createElement('div');
+    sec.className = 'section-label' + (first ? ' section-first' : '');
+    sec.innerHTML = `<span>${TIME_ICONS[time]}</span>`;
+    container.appendChild(sec);
+    first = false;
+
+    grouped[time].forEach(v => {
+      const checked = !!state['v_' + v.id];
+      const isCustom = custom.v.some(c => c.id === v.id);
+      const card = document.createElement('div');
+      card.className = 'item-card' + (checked ? ' checked' : '');
+      card.innerHTML = `
+        <div class="custom-check" onclick="toggleItem('v_${v.id}','vitamins')">${checked ? '✓' : ''}</div>
+        <div class="item-info">
+          <div class="item-name">${v.name}</div>
+          ${v.note ? `<div class="item-note">${v.note}</div>` : ''}
+        </div>
+        <span class="time-badge ${BADGE_CLS[time]}">${TIME_LABELS[time]}</span>
+        <button class="delete-btn" onclick="${isCustom ? `deleteCustomV('${v.id}')` : `hideSeedV('${v.id}')`}">✕ remove</button>
+      `;
+      container.appendChild(card);
+    });
+  });
+
+  const done = Object.keys(state).filter(k => k.startsWith('v_') && state[k]).length;
+  updateProgress('vitamins', allV.length, done);
+  populateVitHistorySelect();
+}
+
+function hideSeedV(id) {
+  if (!confirm('Remove this supplement from your list? You can restore it from Settings later.')) return;
+  const h = loadHidden(); h.v.push(id); saveHidden(h);
+  renderVitamins();
+}
+function deleteCustomV(id) {
+  if (!confirm('Delete this supplement?')) return;
+  const c = loadCustom(); c.v = c.v.filter(x => x.id !== id); saveCustom(c);
+  renderVitamins();
+}
+
+// ── Self Care ─────────────────────────────────────────────────────────────────
+
+const FREQ_ORDER = ['Daily','2x week','Weekly','Every 2 weeks','Monthly','As needed'];
+const FREQ_ICONS = {
+  'Daily':          '🌅 Daily',
+  '2x week':        '🔁 2× / Week',
+  'Weekly':         '📆 Weekly',
+  'Every 2 weeks':  '🗓 Every 2 Weeks',
+  'Monthly':        '🌙 Monthly',
+  'As needed':      '✨ As Needed',
+};
+const FREQ_CLS = {
+  'Daily':         'freq-daily',
+  '2x week':       'freq-2xweek',
+  'Weekly':        'freq-weekly',
+  'Every 2 weeks': 'freq-2weeks',
+  'Monthly':       'freq-monthly',
+  'As needed':     'freq-asneeded',
+};
+
+function renderSelfcare() {
+  const state  = loadState();
+  const hidden = loadHidden();
+  const custom = loadCustom();
+  const allSC  = [
+    ...SEED_SELFCARE.filter(s => !hidden.s.includes(s.id)),
+    ...custom.s
+  ];
+
+  const container = document.getElementById('selfcare-list');
+  container.innerHTML = '';
+
+  const grouped = {};
+  FREQ_ORDER.forEach(f => grouped[f] = []);
+  allSC.forEach(sc => { if (grouped[sc.freq]) grouped[sc.freq].push(sc); else grouped['As needed'].push(sc); });
+
+  let first = true;
+  FREQ_ORDER.forEach(freq => {
+    if (!grouped[freq].length) return;
+    const sec = document.createElement('div');
+    sec.className = 'section-label' + (first ? ' section-first' : '');
+    sec.innerHTML = `<span>${FREQ_ICONS[freq]}</span>`;
+    container.appendChild(sec);
+    first = false;
+
+    grouped[freq].forEach(sc => {
+      const checked = !!state['s_' + sc.id];
+      const isCustom = custom.s.some(c => c.id === sc.id);
+      const card = document.createElement('div');
+      card.className = 'item-card' + (checked ? ' checked' : '');
+      card.innerHTML = `
+        <div class="custom-check" onclick="toggleItem('s_${sc.id}','selfcare')">${checked ? '✓' : ''}</div>
+        <div class="item-info">
+          <div class="item-name">${sc.name}</div>
+          ${sc.note ? `<div class="item-note">${sc.note}</div>` : ''}
+        </div>
+        <span class="freq-badge ${FREQ_CLS[sc.freq] || 'freq-asneeded'}">${sc.freq}</span>
+        <button class="delete-btn" onclick="${isCustom ? `deleteCustomSC('${sc.id}')` : `hideSeedSC('${sc.id}')`}">✕ remove</button>
+      `;
+      container.appendChild(card);
+    });
+  });
+
+  const done = Object.keys(state).filter(k => k.startsWith('s_') && state[k]).length;
+  updateProgress('selfcare', allSC.length, done);
+  populateSCHistorySelect();
+}
+
+function hideSeedSC(id) {
+  if (!confirm('Remove this ritual from your list?')) return;
+  const h = loadHidden(); h.s.push(id); saveHidden(h);
+  renderSelfcare();
+}
+function deleteCustomSC(id) {
+  if (!confirm('Delete this ritual?')) return;
+  const c = loadCustom(); c.s = c.s.filter(x => x.id !== id); saveCustom(c);
+  renderSelfcare();
+}
+
+// ── History (lookup dates by vitamin / self-care item) ────────────────────────
+
+function getAllCheckDates() {
+  const out = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key && key.startsWith('wellness_checks_')) {
+      out.push({ key, date: key.slice('wellness_checks_'.length) });
+    }
+  }
+  return out;
+}
+function fmtHistDate(iso) {
+  return new Date(iso + 'T12:00:00').toLocaleDateString('es-MX', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function populateVitHistorySelect() {
+  const hidden = loadHidden();
+  const custom = loadCustom();
+  const allV = [...SEED_VITAMINS.filter(v => !hidden.v.includes(v.id)), ...custom.v];
+  const sel = document.getElementById('vit-history-select');
+  const prevVal = sel.value;
+  sel.innerHTML = '';
+  const ph = document.createElement('option'); ph.value = ''; ph.textContent = 'Selecciona una vitamina…';
+  sel.appendChild(ph);
+  allV.forEach(v => {
+    const opt = document.createElement('option'); opt.value = v.id; opt.textContent = v.name;
+    sel.appendChild(opt);
+  });
+  if (allV.some(v => v.id === prevVal)) { sel.value = prevVal; renderVitHistory(prevVal); }
+  else { document.getElementById('vit-history-result').innerHTML = ''; }
+}
+
+function renderVitHistory(vitId) {
+  const resultEl = document.getElementById('vit-history-result');
+  if (!vitId) { resultEl.innerHTML = ''; return; }
+  const dates = getAllCheckDates()
+    .filter(({ key }) => { try { return !!JSON.parse(localStorage.getItem(key))['v_' + vitId]; } catch { return false; } })
+    .map(({ date }) => date)
+    .sort()
+    .reverse();
+  if (!dates.length) {
+    resultEl.innerHTML = '<div class="history-empty">Aún no hay fechas registradas para esta vitamina.</div>';
+    return;
+  }
+  resultEl.innerHTML = `
+    <div class="history-count">${dates.length} ${dates.length === 1 ? 'vez registrada' : 'veces registradas'}</div>
+    <div class="history-dates">${dates.map(d => `<span class="history-chip">${fmtHistDate(d)}</span>`).join('')}</div>
+  `;
+}
+
+function populateSCHistorySelect() {
+  const hidden = loadHidden();
+  const custom = loadCustom();
+  const allSC = [...SEED_SELFCARE.filter(s => !hidden.s.includes(s.id)), ...custom.s];
+  const sel = document.getElementById('sc-history-select');
+  const prevVal = sel.value;
+  sel.innerHTML = '';
+  const ph = document.createElement('option'); ph.value = ''; ph.textContent = 'Selecciona un ritual…';
+  sel.appendChild(ph);
+  allSC.forEach(s => {
+    const opt = document.createElement('option'); opt.value = s.id; opt.textContent = s.name;
+    sel.appendChild(opt);
+  });
+  if (allSC.some(s => s.id === prevVal)) { sel.value = prevVal; renderSCHistory(prevVal); }
+  else { document.getElementById('sc-history-result').innerHTML = ''; }
+}
+
+function renderSCHistory(scId) {
+  const resultEl = document.getElementById('sc-history-result');
+  if (!scId) { resultEl.innerHTML = ''; return; }
+  const dates = getAllCheckDates()
+    .filter(({ key }) => { try { return !!JSON.parse(localStorage.getItem(key))['s_' + scId]; } catch { return false; } })
+    .map(({ date }) => date)
+    .sort()
+    .reverse();
+  if (!dates.length) {
+    resultEl.innerHTML = '<div class="history-empty">Aún no hay fechas registradas para este ritual.</div>';
+    return;
+  }
+  resultEl.innerHTML = `
+    <div class="history-count">${dates.length} ${dates.length === 1 ? 'vez registrada' : 'veces registradas'}</div>
+    <div class="history-dates">${dates.map(d => `<span class="history-chip sc">${fmtHistDate(d)}</span>`).join('')}</div>
+  `;
+}
+
+// ── Toggle ────────────────────────────────────────────────────────────────────
+
+function toggleItem(key, tab) {
+  const s = loadState();
+  s[key] = !s[key];
+  saveState(s);
+  tab === 'vitamins' ? renderVitamins() : renderSelfcare();
+}
+
+// ── Progress ──────────────────────────────────────────────────────────────────
+
+function updateProgress(tab, total, done) {
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  document.getElementById(tab === 'vitamins' ? 'vit-progress-fill' : 'sc-progress-fill').style.width = pct + '%';
+  document.getElementById(tab === 'vitamins' ? 'vit-progress-text' : 'sc-progress-text').textContent = `${done} / ${total} completadas`;
+}
+
+// ── Add custom ────────────────────────────────────────────────────────────────
+
+function addVitamin() {
+  const name = document.getElementById('new-vit-name').value.trim();
+  const time = document.getElementById('new-vit-time').value;
+  const note = document.getElementById('new-vit-note').value.trim();
+  if (!name || !time) { alert('Please enter a name and when to take it.'); return; }
+  const c = loadCustom();
+  c.v.push({ id: 'cv_' + Date.now(), name, time, note });
+  saveCustom(c);
+  document.getElementById('new-vit-name').value = '';
+  document.getElementById('new-vit-time').value = '';
+  document.getElementById('new-vit-note').value = '';
+  renderVitamins();
+}
+
+function addSelfcare() {
+  const name = document.getElementById('new-sc-name').value.trim();
+  const freq = document.getElementById('new-sc-freq').value;
+  const note = document.getElementById('new-sc-note').value.trim();
+  if (!name || !freq) { alert('Please enter a name and frequency.'); return; }
+  const c = loadCustom();
+  c.s.push({ id: 'cs_' + Date.now(), name, freq, note });
+  saveCustom(c);
+  document.getElementById('new-sc-name').value = '';
+  document.getElementById('new-sc-freq').value = '';
+  document.getElementById('new-sc-note').value = '';
+  renderSelfcare();
+}
+
+// ── Backup / Restore ──────────────────────────────────────────────────────────
+
+function exportBackup() {
+  // Collect all wellness keys from localStorage
+  const backup = { exported: new Date().toISOString(), data: {} };
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key.startsWith('wellness_')) {
+      try { backup.data[key] = JSON.parse(localStorage.getItem(key)); }
+      catch { backup.data[key] = localStorage.getItem(key); }
+    }
+  }
+  const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  const date = new Date().toISOString().slice(0,10);
+  a.href     = url;
+  a.download = `wellness-backup-${date}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importBackup(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const backup = JSON.parse(e.target.result);
+      if (!backup.data) { alert('Invalid backup file.'); return; }
+      if (!confirm('This will replace your current data with the backup. Continue?')) return;
+      // Clear existing wellness keys
+      const toRemove = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith('wellness_')) toRemove.push(key);
+      }
+      toRemove.forEach(k => localStorage.removeItem(k));
+      // Restore
+      Object.entries(backup.data).forEach(([k, v]) => {
+        localStorage.setItem(k, typeof v === 'string' ? v : JSON.stringify(v));
+      });
+      renderVitamins();
+      renderSelfcare();
+      alert('✅ Backup restored successfully!');
+    } catch {
+      alert('Could not read the file. Make sure it\'s a valid wellness backup.');
+    }
+    event.target.value = ''; // reset input so same file can be re-imported
+  };
+  reader.readAsText(file);
+}
+
+// ── Tab / reset / date ────────────────────────────────────────────────────────
+
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  btn.classList.add('active');
+}
+
+function resetAll() {
+  if (!confirm('Reset all checks for this day?')) return;
+  localStorage.removeItem('wellness_checks_' + todayStr());
+  renderVitamins();
+  renderSelfcare();
+}
+
+document.getElementById('dateInput').value = new Date().toISOString().slice(0,10);
+document.getElementById('dateInput').addEventListener('change', () => { renderVitamins(); renderSelfcare(); });
+
+renderVitamins();
+renderSelfcare();
+</script>
+</body>
+</html>
